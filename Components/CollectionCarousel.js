@@ -13,6 +13,7 @@ function CollectionCarousel({ collection }) {
               image={product.node.featuredImage.url}
               title={product.node.title}
               price={product.node.priceRange.minVariantPrice.amount}
+              page={product.node.handle}
               key={product.node.title}
             />
           )

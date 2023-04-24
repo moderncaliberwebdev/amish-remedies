@@ -105,12 +105,15 @@
 }
 
 .ingredients {
-  margin: 10rem 0 20rem 0;
+  margin: 10rem 0 0 -8rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   position: relative;
   align-items: center;
+  width: 100vw;
+  overflow: hidden;
+  padding-bottom: 20rem;
 
   &__graphic {
     background-color: $red;
@@ -147,7 +150,7 @@
   &__gummies {
     position: absolute;
     z-index: 1;
-    left: -15rem;
+    left: -10rem;
     top: 5rem;
   }
   &__apple {

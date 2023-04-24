@@ -1,0 +1,75 @@
+@import 'variables';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: $tirtiary;
+  border-radius: 20px;
+  position: relative;
+  height: 45rem;
+  overflow: hidden;
+  margin-bottom: 5rem;
+
+  &__left {
+    width: 70%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    &:nth-of-type(2) {
+      text-align: right;
+
+      p {
+        margin: 2rem 0 2rem auto;
+      }
+
+      a {
+        margin: 0 0 0 auto;
+      }
+    }
+
+    h1 {
+      font-size: $font-big-head;
+    }
+    p {
+      font-size: $font-text;
+      font-family: Georgia;
+      margin: 2rem 0;
+      width: 70%;
+    }
+    a {
+      font-size: $font-text;
+      background-color: $secondary;
+      color: #000;
+      text-decoration: none;
+      padding: 2rem 5rem;
+      display: inline-block;
+      font-weight: bold;
+      width: 20rem;
+    }
+  }
+  &__right_bottles {
+    width: 40%;
+    position: relative;
+    margin-right: 10rem;
+    margin-top: -20rem;
+
+    img {
+      height: 110rem;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  &__right_eggs {
+    width: 40%;
+    position: relative;
+    margin: auto 0 auto 5rem;
+
+    img {
+      height: 40rem;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}

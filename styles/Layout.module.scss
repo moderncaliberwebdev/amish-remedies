@@ -1,0 +1,28 @@
+@import 'variables';
+
+.nav {
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    font-family: Georgia;
+    font-size: $font-text;
+
+    li {
+      .nav__cart {
+        padding: 0.5rem;
+        background: $secondary;
+        border-radius: 10px;
+        width: 4rem;
+        height: 4rem;
+
+        img {
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import CollectionCarousel from '../Components/CollectionCarousel'
 
 export default function Home({ products }) {
+  //shows me products gathered from graphql api
   useEffect(() => {
     console.log(products)
   }, [products])
@@ -39,6 +40,55 @@ export default function Home({ products }) {
           </div>
         </div>
         <CollectionCarousel collection={products[1]} />
+        <div className={styles.stats}>
+          <div className={styles.stats__stat}>
+            <img src='/home/people.png' alt='Happy Customers Icon' />
+            <div>
+              <h3>500+</h3>
+              <p>Happy Customers</p>
+            </div>
+          </div>
+          <div className={styles.stats__stat}>
+            <img src='/home/thumbs-up.png' alt='Positive Feedback' />
+            <div>
+              <h3>100%</h3>
+              <p>Positive Feedback</p>
+            </div>
+          </div>
+          <div className={styles.stats__stat}>
+            <img src='/home/box.png' alt='Simple Products' />
+            <div>
+              <h3>2</h3>
+              <p>Simple Products</p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.ingredients}>
+          <div className={styles.ingredients__graphic}>
+            <img
+              src='/home/ingredients-bottles.png'
+              alt='Old Amish Remedy Bottles'
+            />
+          </div>
+          <div className={styles.ingredients__info}>
+            <h2>All Natural Ingredients to Boost Health and Wellness</h2>
+            <ul>
+              <li>All Natural Ginger</li>
+              <li>Apple Cider Vinegar</li>
+              <li>Garlic Juice</li>
+            </ul>
+          </div>
+          <img
+            className={styles.ingredients__gummies}
+            src='/home/gummies.png'
+            alt='Gummy graphic'
+          />
+          <img
+            className={styles.ingredients__apple}
+            src='/home/apple.png'
+            alt='Apple'
+          />
+        </div>
       </Layout>
     </>
   )

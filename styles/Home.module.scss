@@ -73,3 +73,87 @@
     }
   }
 }
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: $secondary;
+  width: 100vw;
+  margin: 10rem 0 0 -8rem;
+
+  padding: 5rem 0;
+
+  &__stat {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img {
+      width: 15rem;
+    }
+    div {
+      h3 {
+        font-size: $font-big-text;
+      }
+      p {
+        font-size: $font-text;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+    }
+  }
+}
+
+.ingredients {
+  margin: 10rem 0 20rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+
+  &__graphic {
+    background-color: $red;
+    width: 50rem;
+    height: 50rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    border-radius: 15px;
+  }
+
+  &__info {
+    position: relative;
+    z-index: 10;
+    background-color: $tirtiary;
+    height: 100%;
+    padding: 2rem;
+    width: 30rem;
+    border-radius: 0 15px 15px 0;
+
+    h2 {
+      font-size: $font-small-head;
+    }
+
+    ul {
+      li {
+        font-size: $font-text;
+
+        margin: 1rem 3rem;
+      }
+    }
+  }
+
+  &__gummies {
+    position: absolute;
+    z-index: 1;
+    left: -15rem;
+    top: 5rem;
+  }
+  &__apple {
+    position: absolute;
+    z-index: 1;
+    right: -35rem;
+    top: 20rem;
+  }
+}

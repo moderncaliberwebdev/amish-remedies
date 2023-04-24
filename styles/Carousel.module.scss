@@ -1,0 +1,22 @@
+@import 'variables';
+
+.carousel {
+  margin: 6rem 0;
+
+  h2 {
+    font-size: $font-small-head;
+    margin-bottom: 1rem;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: auto;
+    width: 100vw;
+    padding: 6rem 0;
+    margin: -6rem 0 -6rem -8rem;
+  }
+}

@@ -40,6 +40,7 @@ export default function Home({ products }) {
           </div>
         </div>
         <CollectionCarousel collection={products[1]} />
+
         <div className={styles.stats}>
           <div className={styles.stats__stat}>
             <img src='/home/people.png' alt='Happy Customers Icon' />

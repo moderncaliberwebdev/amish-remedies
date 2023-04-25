@@ -9,14 +9,37 @@
   }
 
   &__container {
-    display: flex;
-    flex-direction: row;
-    gap: 3rem;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    overflow-y: auto;
-    width: 100vw;
-    padding: 6rem 0;
-    margin: -6rem 0 -6rem -8rem;
+    position: relative;
+    &__arrows {
+      img {
+        position: absolute;
+        z-index: 20;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        &:first-of-type {
+          left: -8rem;
+        }
+        &:last-of-type {
+          right: -8rem;
+        }
+      }
+    }
+    #cards {
+      animation: all 1s;
+    }
+    &__cards {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      gap: 3rem;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      overflow-y: auto;
+      width: 100vw;
+      padding: 6rem 0;
+      margin: -6rem 0 -6rem -8rem;
+    }
   }
 }

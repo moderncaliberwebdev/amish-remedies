@@ -1,7 +1,18 @@
+import { useState } from 'react'
 import styles from '../styles/Layout.module.scss'
 import Link from 'next/link'
 
 export default function Layout({ children }) {
+  const [search, setSearch] = useState(false)
+
+  const toggleSearch = () => {
+    const searchComponent = document.querySelector('#search')
+
+    searchComponent.style.top = !search ? 0 : '-100%'
+
+    setSearch(!search)
+  }
+
   return (
     <>
       <nav className={styles.nav}>
@@ -11,6 +22,7 @@ export default function Layout({ children }) {
               className={styles.nav__search}
               src='/home/Search.png'
               alt='Search'
+              onClick={toggleSearch}
             />
           </li>
           <li>Products</li>
@@ -27,6 +39,17 @@ export default function Layout({ children }) {
           </li>
         </ul>
       </nav>
+      <div className={styles.search} id='search'>
+        <div className={styles.search__searchbar}>
+          <input type='text' placeholder='Search Products...' />
+          <img src='/home/Search.png' alt='Search' />
+        </div>
+        <img
+          src='/home/Close.png'
+          alt='Close Search bar'
+          onClick={toggleSearch}
+        />
+      </div>
       <main>{children}</main>
       <footer className={styles.footer}>
         <div className={styles.footer__top}>

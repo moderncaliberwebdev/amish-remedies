@@ -8,7 +8,7 @@ export default function Layout({ children }) {
   const toggleSearch = () => {
     const searchComponent = document.querySelector('#search')
 
-    searchComponent.style.top = !search ? 0 : '-100%'
+    searchComponent.style.top = !search ? 0 : '-20%'
 
     setSearch(!search)
   }
@@ -25,10 +25,18 @@ export default function Layout({ children }) {
               onClick={toggleSearch}
             />
           </li>
-          <li>Products</li>
+          <li>
+            <Link href='/products'>Products</Link>{' '}
+          </li>
           <li>Shop by Category</li>
           <li>
-            <img className={styles.nav__logo} src='/home/logo.png' alt='Logo' />
+            <Link href='/'>
+              <img
+                className={styles.nav__logo}
+                src='/home/logo.png'
+                alt='Logo'
+              />
+            </Link>
           </li>
           <li>Learn</li>
           <li>Contact Us</li>

@@ -11,6 +11,10 @@
     font-size: $font-text;
 
     li {
+      a {
+        text-decoration: none;
+        color: #000;
+      }
       .nav__search {
         cursor: pointer;
       }
@@ -42,7 +46,7 @@
   justify-content: center;
   padding: 3rem;
   align-items: center;
-  top: -100%;
+  top: -20%;
   transition: all 0.5s;
 
   img {

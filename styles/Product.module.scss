@@ -1,0 +1,45 @@
+@import 'variables';
+
+.card {
+  width: 30rem;
+  box-shadow: 0 20px 50px $tirtiary;
+  border-radius: 15px;
+  flex: 0 0 auto;
+  position: relative;
+  scroll-snap-align: center;
+
+  &__img {
+    img {
+      height: 25rem;
+      width: 30rem;
+      object-fit: contain;
+    }
+  }
+  &__info {
+    background-color: $tirtiary;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 0 0 15px 15px;
+    height: 25rem;
+    a {
+      text-decoration: none;
+      color: #000;
+
+      h3 {
+        font-size: $font-big-text;
+      }
+      p {
+        font-size: $font-text;
+        margin: 1.5rem 0;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+    }
+    button {
+      color: #fff;
+      background-color: $secondary;
+      padding: 2rem 5rem;
+      font-size: $font-text;
+      border-style: none;
+    }
+  }
+}

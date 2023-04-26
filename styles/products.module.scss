@@ -1,0 +1,173 @@
+@import 'variables';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: $tirtiary;
+  border-radius: 20px;
+  position: relative;
+  height: 20rem;
+  overflow: hidden;
+  margin-bottom: 5rem;
+
+  &__left {
+    width: 70%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:nth-of-type(2) {
+      text-align: right;
+
+      p {
+        margin: 2rem 0 2rem auto;
+      }
+
+      a {
+        margin: 0 0 0 auto;
+      }
+    }
+
+    h1 {
+      font-size: $font-big-head;
+    }
+    p {
+      font-size: $font-text;
+      font-family: Georgia;
+      margin: 2rem 0;
+      width: 70%;
+    }
+    a {
+      font-size: $font-text;
+      background-color: $secondary;
+      color: #000;
+      text-decoration: none;
+      padding: 2rem 5rem;
+      display: inline-block;
+      font-weight: bold;
+      width: 20rem;
+    }
+  }
+  &__right {
+    width: 40%;
+    position: relative;
+    margin-right: 10rem;
+    margin-top: -5%;
+
+    img {
+      height: 140%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 4rem;
+
+  &__filter {
+    min-width: 30rem;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    height: 100%;
+
+    h2 {
+      font-size: $font-big-text;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #cccc;
+    }
+
+    &__search {
+      position: relative;
+      border-bottom: 1px solid #cccc;
+
+      input {
+        border-style: none;
+        border-bottom: 1px solid #000;
+        display: block;
+        margin: 1rem 2rem;
+        padding: 1rem 3rem 1rem 1rem;
+        width: 80%;
+        height: 3rem;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      img {
+        height: 3rem;
+        width: 4rem;
+        position: absolute;
+        margin: auto 0;
+        padding: 0.5rem 1rem;
+        right: 3rem;
+        top: 0;
+        cursor: pointer;
+      }
+    }
+
+    h3 {
+      font-size: $font-text;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #cccc;
+    }
+
+    &__options {
+      p {
+        font-size: $font-text;
+        padding: 1rem 2rem;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+
+        &:last-of-type {
+          border-bottom: 1px solid #cccc;
+        }
+      }
+    }
+  }
+
+  &__productlist {
+    margin-bottom: 5rem;
+    &__sort {
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      width: 30rem;
+      margin: 0 auto 3rem auto;
+
+      label {
+        font-size: $font-text;
+        margin-right: 0.5rem;
+        font-weight: 700;
+      }
+      select {
+        font-size: $font-text;
+        border-style: none;
+        font-weight: 300;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    &__products {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      width: 100%;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+  }
+}

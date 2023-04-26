@@ -26,9 +26,11 @@ export default function Layout({ children }) {
             />
           </li>
           <li>
-            <Link href='/products'>Products</Link>{' '}
+            <Link href='/products'>Products</Link>
           </li>
-          <li>Shop by Category</li>
+          <li>
+            <Link href='/categories'>Shop by Category</Link>
+          </li>
           <li>
             <Link href='/'>
               <img

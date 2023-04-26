@@ -2,12 +2,17 @@ import styles from '../styles/Home.module.scss'
 import Layout from '../Components/Layout'
 import Link from 'next/link'
 
-// import { shopifyClient, parseShopifyResponse } from '../lib/shopify'
 import { getProductsInCollection } from '../lib/shopify'
 import { useEffect } from 'react'
 import CollectionCarousel from '../Components/CollectionCarousel'
 
+import { selectAuthState, setAuthState } from '../store/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+
 export default function Home({ products }) {
+  const authState = useSelector(selectAuthState)
+  const dispatch = useDispatch()
+
   //shows me products gathered from graphql api
   useEffect(() => {
     console.log(products)
@@ -25,6 +30,19 @@ export default function Home({ products }) {
           <img src='/home/header-bottles.png' alt='Amish Remedy Bottles' />
         </div>
       </div>
+      {/* REDUX TEST STATE  */}
+      {/* <div>
+        <div>{authState ? 'Logged in' : 'Not Logged In'}</div>
+        <button
+          onClick={() =>
+            authState
+              ? dispatch(setAuthState(false))
+              : dispatch(setAuthState(true))
+          }
+        >
+          {authState ? 'Logout' : 'LogIn'}
+        </button>
+      </div> */}
       <CollectionCarousel collection={products[0]} />
       <div className={styles.header}>
         <div className={styles.header__right_eggs}>

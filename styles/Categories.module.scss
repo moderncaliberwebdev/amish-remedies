@@ -1,0 +1,62 @@
+@import 'variables';
+
+.block {
+  background: $secondary;
+  padding: 5rem 2rem;
+  width: 35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+
+  img {
+    padding: 2rem;
+    border-radius: 50%;
+    background-color: #fff;
+    width: 30rem;
+    height: 30rem;
+    object-fit: contain;
+    object-position: center;
+  }
+  h3 {
+    font-size: $font-big-text;
+    font-weight: 700;
+  }
+}
+
+.text {
+  width: 50%;
+  h2 {
+    font-size: $font-big-text;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: $font-text;
+    margin: 1rem 0;
+  }
+  a {
+    font-size: $font-text;
+    color: $secondary;
+    text-decoration: none;
+    padding: 0.5rem 3rem;
+    border: 3px solid $secondary;
+    display: inline-block;
+    font-weight: 700;
+  }
+}
+
+.left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  margin: 5rem 0;
+}
+.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  gap: 3rem;
+}

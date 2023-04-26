@@ -40,12 +40,19 @@ export default function Layout({ children }) {
               />
             </Link>
           </li>
-          <li>Learn</li>
-          <li>Contact Us</li>
           <li>
-            <div className={styles.nav__cart}>
-              <img src='/home/Shopping-Cart.png' alt='Cart' />
-            </div>
+            <Link href='/learn'>Learn</Link>
+          </li>
+          <li>
+            <Link href='/contact'>Contact Us</Link>
+          </li>
+          <li>
+            <Link href='/cart'>
+              <div className={styles.nav__cart}>
+                <img src='/home/Shopping-Cart.png' alt='Cart' />
+                <p>10</p>
+              </div>
+            </Link>
           </li>
         </ul>
       </nav>

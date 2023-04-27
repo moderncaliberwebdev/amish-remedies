@@ -1,0 +1,51 @@
+@import 'variables';
+
+.learn {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  margin: 5rem 0;
+
+  h2 {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    color: #fff;
+    font-size: $font-big-head;
+  }
+
+  &__left {
+    position: relative;
+    overflow: hidden;
+    width: 50%;
+
+    img {
+      width: 100%;
+      height: 60rem;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+  }
+  &__right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    &__top {
+      position: relative;
+      height: 28rem;
+    }
+    &__bottom {
+      position: relative;
+      height: 28rem;
+    }
+  }
+}

@@ -92,10 +92,10 @@ export default function Layout({ children }) {
               <Link href='/learn/benefits'>Benefits</Link>
             </li>
             <li>
-              <Link href='/learn/Ingredients'>Ingredients</Link>
+              <Link href='/learn/ingredients'>Ingredients</Link>
             </li>
             <li>
-              <Link href='/learn/History'>History</Link>
+              <Link href='/learn/history'>History</Link>
             </li>
           </ul>
           <ul>

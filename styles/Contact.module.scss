@@ -1,0 +1,82 @@
+@import 'variables';
+
+.contact {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  margin: 5rem 0;
+
+  &__left {
+    h1 {
+      font-size: $font-big-head;
+    }
+    p {
+      font-size: $font-text;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    form {
+      margin: 4rem 0 0 0;
+      div {
+        label {
+          display: flex;
+          flex-direction: row;
+          gap: 2rem;
+          justify-content: left;
+          align-items: center;
+
+          .number {
+            padding: 0 1rem;
+            border-radius: 10px;
+            border: 1.2px solid #000;
+          }
+          .label {
+            font-weight: 700;
+          }
+        }
+
+        input {
+          border-style: none;
+          border-bottom: 1px solid #000;
+          margin: 1rem 0 2rem 6.5rem;
+          font-size: $font-text;
+          width: 40rem;
+          padding: 0.5rem;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+    &__response {
+      font-size: $font-text;
+      margin: 1rem 0;
+      color: $secondary;
+    }
+    button {
+      color: #fff;
+      padding: 1rem 3rem;
+      background-color: $secondary;
+      border-style: none;
+      font-size: $font-text;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+
+  &__right {
+    font-size: $font-text;
+
+    img {
+      height: 25rem;
+    }
+    h2 {
+      margin-top: 1rem;
+      font-size: $font-text;
+    }
+    p {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+  }
+}

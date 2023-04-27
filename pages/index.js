@@ -31,7 +31,7 @@ export default function Home({ products }) {
         </div>
       </div>
       {/* REDUX TEST STATE  */}
-      <div>
+      {/* <div>
         <div>{authState ? 'Logged in' : 'Not Logged In'}</div>
         <button
           onClick={() =>
@@ -42,7 +42,7 @@ export default function Home({ products }) {
         >
           {authState ? 'Logout' : 'LogIn'}
         </button>
-      </div>
+      </div> */}
       <CollectionCarousel collection={products[0]} />
       <div className={styles.header}>
         <div className={styles.header__right_eggs}>

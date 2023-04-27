@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default function Categories() {
   return (
     <Layout>
-      {/* <div className={styles.left}>
+      <div className={styles.left}>
         <div className={`${styles.left__block} ${styles.block}`}>
           <img src='/categories/bottle.png' alt='Remedy Bottle' />
           <h3>Remedies</h3>
@@ -68,7 +68,7 @@ export default function Categories() {
           </p>
           <Link href='/products?collection=remedies'>Shop Now</Link>
         </div>
-      </div> */}
+      </div>
     </Layout>
   )
 }

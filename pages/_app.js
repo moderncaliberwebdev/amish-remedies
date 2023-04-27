@@ -1,7 +1,6 @@
 import '../styles/globals.scss'
 import { wrapper } from '../store/store'
 import { PersistGate } from 'redux-persist/integration/react'
-import { useStore } from 'react-redux'
 import { Provider } from 'react-redux'
 import Head from 'next/head'
 

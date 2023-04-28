@@ -24,7 +24,7 @@ export default function Home({ products }) {
         <div className={styles.header__left}>
           <h1>Find the natural remedy that is best for you!</h1>
           <p>Premium natural formula that helps your body feel its best</p>
-          <Link href='/products/remedies'>Shop Now</Link>
+          <Link href='/products?collection=remedies'>Shop Now</Link>
         </div>
         <div className={styles.header__right_bottles}>
           <img src='/home/header-bottles.png' alt='Amish Remedy Bottles' />
@@ -53,7 +53,7 @@ export default function Home({ products }) {
           <p>
             All types of bird breeds and varieties available for hatching only
           </p>
-          <Link href='/products/eggs'>Shop Now</Link>
+          <Link href='/products?collection=hatching-eggs'>Shop Now</Link>
         </div>
       </div>
       <CollectionCarousel collection={products[1]} />

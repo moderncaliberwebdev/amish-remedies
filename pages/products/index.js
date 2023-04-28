@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import Layout from '../Components/Layout'
-import styles from '../styles/products.module.scss'
-import { getAllProducts } from '../lib/shopify'
-import Product from '../Components/Product'
+import Layout from '../../Components/Layout'
+import styles from '../../styles/products.module.scss'
+import { getAllProducts } from '../../lib/shopify'
+import Product from '../../Components/Product'
 
 export default function Products({ products }) {
   //shows me products gathered from graphql api

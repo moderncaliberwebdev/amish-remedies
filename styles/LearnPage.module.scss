@@ -1,0 +1,62 @@
+@import 'variables';
+
+.header {
+  width: 100%;
+  margin: 5rem 0;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  h1 {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    color: #fff;
+    font-size: $font-small-head;
+    font-weight: 700;
+  }
+}
+.content {
+  margin-bottom: 5rem;
+
+  p {
+    font-size: $font-text;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 120%;
+    margin: 2rem 0;
+
+    a {
+      margin: 0 0.5rem;
+      color: #000;
+    }
+  }
+  h2 {
+    font-size: $font-big-text;
+    font-weight: 700;
+    margin: 2rem 0 1rem 0;
+  }
+
+  &__imageleft {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+
+    img {
+      max-width: 40rem;
+    }
+  }
+
+  &__imageright {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    text-align: right;
+    margin: 3rem 0;
+    align-items: center;
+  }
+}

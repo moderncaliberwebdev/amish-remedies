@@ -66,9 +66,10 @@
 .products {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 4rem;
   width: 100%;
+  margin-bottom: 5rem;
 
   &__filter {
     min-width: 20rem;
@@ -135,8 +136,6 @@
   }
 
   &__productlist {
-    margin-bottom: 5rem;
-
     &__sort {
       padding: 0.5rem;
       border-radius: 10px;
@@ -146,7 +145,7 @@
       justify-content: center;
       font-family: Georgia, 'Times New Roman', Times, serif;
       width: 30rem;
-      margin: 0 auto 3rem auto;
+      margin: 0 0 3rem 0;
 
       label {
         font-size: $font-text;
@@ -171,6 +170,10 @@
       width: 100%;
       gap: 4rem;
       flex-wrap: wrap;
+
+      p {
+        font-size: $font-text;
+      }
     }
   }
 }

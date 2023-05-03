@@ -24,7 +24,9 @@ export default function Categories() {
             for a natural way to improve your health and wellbeing, our Remedies
             collection is the perfect place to start. Try it today!
           </p>
-          <Link href='/products?collection=remedies'>Shop Now</Link>
+          <Link href='/products?collection=Remedies&price=&keyword='>
+            Shop Now
+          </Link>
         </div>
       </div>
       <div className={styles.right}>
@@ -41,7 +43,9 @@ export default function Categories() {
             that are at peak fertility and have been carefully packaged and
             shipped to ensure their safe arrival.
           </p>
-          <Link href='/products?collection=hatching-eggs'>Shop Now</Link>
+          <Link href='/products?collection=Hatching%20Eggs&price=&keyword='>
+            Shop Now
+          </Link>
         </div>
         <div className={`${styles.right__block} ${styles.block}`}>
           <img src='/home/eggs.png' alt='Hatching Eggs' />
@@ -66,7 +70,7 @@ export default function Categories() {
             for a natural way to improve your health and wellbeing, our Remedies
             collection is the perfect place to start. Try it today!
           </p>
-          <Link href='/products?collection=remedies'>Shop Now</Link>
+          <Link href='/products?collection=Remedies'>Shop Now</Link>
         </div>
       </div>
     </Layout>

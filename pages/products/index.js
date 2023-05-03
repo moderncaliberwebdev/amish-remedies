@@ -130,11 +130,25 @@ export default function Products({ products, collections }) {
     <Layout>
       <div className={styles.header}>
         <div className={styles.header__left}>
-          <h1>All Products</h1>
-          <p>508 Products</p>
+          <h1>
+            {filterCollectionName.length > 0
+              ? filterCollectionName
+              : 'All Products'}
+          </h1>
+          <p>
+            {displayProducts.length}
+            {displayProducts.length == 1 ? ' Product' : ' Products'}
+          </p>
         </div>
         <div className={styles.header__right}>
-          <img src='/products/products.png' alt='Amish Remedy Bottles' />
+          <img
+            src={
+              filterCollectionName == 'Hatching Eggs'
+                ? '/home/eggs.png'
+                : '/products/products.png'
+            }
+            alt='Amish Products Banner'
+          />
         </div>
       </div>
       <div className={styles.products}>
@@ -226,17 +240,21 @@ export default function Products({ products, collections }) {
             </select>
           </div>
           <div className={styles.products__productlist__products}>
-            {displayProducts.map((product) => {
-              return (
-                <Product
-                  image={product.node.featuredImage.url}
-                  title={product.node.title}
-                  price={product.node.priceRange.minVariantPrice.amount}
-                  page={product.node.handle}
-                  key={product.node.handle}
-                />
-              )
-            })}
+            {displayProducts.length > 0 ? (
+              displayProducts.map((product) => {
+                return (
+                  <Product
+                    image={product.node.featuredImage.url}
+                    title={product.node.title}
+                    price={product.node.priceRange.minVariantPrice.amount}
+                    page={product.node.handle}
+                    key={product.node.handle}
+                  />
+                )
+              })
+            ) : (
+              <p>No Products</p>
+            )}
             {/* <Product
               image={
                 'https://cdn.shopify.com/s/files/1/0740/2494/3921/products/s-l1600-1.png?v=1679603451'

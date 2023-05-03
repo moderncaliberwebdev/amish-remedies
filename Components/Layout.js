@@ -76,10 +76,12 @@ export default function Layout({ children }) {
               <Link href='/products'>Products</Link>
             </li>
             <li>
-              <Link href='/products?collection=remedies'>Remedies</Link>
+              <Link href='/products?collection=Remedies&price=&keyword='>
+                Remedies
+              </Link>
             </li>
             <li>
-              <Link href='/products?collection=hatching-eggs'>
+              <Link href='/products?collection=Hatching%20Eggs&price=&keyword='>
                 Fertile Hatching Eggs
               </Link>
             </li>

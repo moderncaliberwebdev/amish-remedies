@@ -4,6 +4,7 @@ import styles from '../../styles/products.module.scss'
 import { getAllProducts, getCollections } from '../../lib/shopify'
 import Product from '../../Components/Product'
 import { useRouter } from 'next/router'
+import Fuse from 'fuse.js'
 
 export default function Products({ products, collections }) {
   //get queries from url
@@ -13,26 +14,26 @@ export default function Products({ products, collections }) {
   //state for the products that are displayed on the page
   const [displayProducts, setDisplayProducts] = useState([])
 
+  //after the api gets the products, it sends them here
   const [productsFromAPI, setProductsFromAPI] = useState([])
 
+  //the state of the indivdual filters
   const [filterCollectionName, setFilterCollectionName] = useState('')
   const [filterPrice, setFilterPrice] = useState('')
   const [filterKeyword, setFilterKeyword] = useState('')
 
   //shows me products and collections gathered from graphql api
   useEffect(() => {
-    console.log('products from graphql >>> ', products)
+    // console.log('products from graphql >>> ', products)
     setProductsFromAPI(products)
   }, [products])
   useEffect(() => {
-    console.log('collections form graphql >>> ', collections)
+    // console.log('collections form graphql >>> ', collections)
   }, [collections])
 
   //run filter function when one of the filters is changed
   useEffect(() => {
-    if (filterCollectionName || filterPrice || filterKeyword) {
-      filterProducts()
-    }
+    filterProducts()
   }, [filterCollectionName, filterPrice, filterKeyword])
 
   //filter results on url update
@@ -98,6 +99,13 @@ export default function Products({ products, collections }) {
     )
   }
 
+  //filter the price -> if the price is already selected, unselect it
+  const filterListener = (number) => {
+    String(query.price) === String(number)
+      ? setFilterPrice('')
+      : setFilterPrice(number)
+  }
+
   return (
     <Layout>
       <div className={styles.header}>
@@ -113,7 +121,12 @@ export default function Products({ products, collections }) {
         <div className={styles.products__filter}>
           <h2>Filters</h2>
           <div className={styles.products__filter__search}>
-            <input type='text' placeholder='Keyword Search' />
+            <input
+              type='text'
+              placeholder='Keyword Search'
+              onChange={(e) => setFilterKeyword(e.target.value)}
+              value={filterKeyword}
+            />
             <img src='/home/Search.png' alt='Search' />
           </div>
           <h3>Product Type</h3>
@@ -121,7 +134,11 @@ export default function Products({ products, collections }) {
             {collections.map((collectionName) => {
               return (
                 <p
-                  onClick={() => setFilterCollectionName(collectionName.title)}
+                  onClick={() =>
+                    String(query.collection) === String(collectionName.title)
+                      ? setFilterCollectionName('')
+                      : setFilterCollectionName(collectionName.title)
+                  }
                   key={collectionName.title}
                   style={{
                     color:
@@ -138,7 +155,7 @@ export default function Products({ products, collections }) {
           <h3>Price</h3>
           <div className={styles.products__filter__options}>
             <p
-              onClick={() => setFilterPrice(0)}
+              onClick={() => filterListener(0)}
               style={{
                 color: query.price && query.price == 0 && '#ebb54a',
               }}
@@ -146,7 +163,7 @@ export default function Products({ products, collections }) {
               $0-$10
             </p>
             <p
-              onClick={() => setFilterPrice(10)}
+              onClick={() => filterListener(10)}
               style={{
                 color: query.price && query.price == 10 && '#ebb54a',
               }}
@@ -154,7 +171,7 @@ export default function Products({ products, collections }) {
               $10-$20
             </p>
             <p
-              onClick={() => setFilterPrice(20)}
+              onClick={() => filterListener(20)}
               style={{
                 color: query.price && query.price == 20 && '#ebb54a',
               }}
@@ -162,7 +179,7 @@ export default function Products({ products, collections }) {
               $20-$30
             </p>
             <p
-              onClick={() => setFilterPrice(30)}
+              onClick={() => filterListener(30)}
               style={{
                 color: query.price && query.price == 30 && '#ebb54a',
               }}
@@ -170,7 +187,7 @@ export default function Products({ products, collections }) {
               $30-$40
             </p>
             <p
-              onClick={() => setFilterPrice(40)}
+              onClick={() => filterListener(40)}
               style={{
                 color: query.price && query.price == 40 && '#ebb54a',
               }}

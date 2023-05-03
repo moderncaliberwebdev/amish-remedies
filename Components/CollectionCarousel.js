@@ -23,7 +23,7 @@ function CollectionCarousel({ collection }) {
         prevIndex === collection.products.edges.length - 1 ? 0 : prevIndex + 1
       )
     }, delay)
-    console.log(index)
+
     //slides autoplay based on
     scrollSlider(index > 0 ? 5 : 0)
 
@@ -97,7 +97,7 @@ function CollectionCarousel({ collection }) {
               />
             )
           })}
-          <ProductCard
+          {/* <ProductCard
             image={
               'https://cdn.shopify.com/s/files/1/0740/2494/3921/products/s-l1600-1.png?v=1679603451'
             }
@@ -124,7 +124,7 @@ function CollectionCarousel({ collection }) {
             }
             title={'Test'}
             price={20}
-          />
+          /> */}
         </div>
       </div>
     </div>

@@ -13,18 +13,15 @@ export default function Home({ products }) {
   const authState = useSelector(selectAuthState)
   const dispatch = useDispatch()
 
-  //shows me products gathered from graphql api
-  useEffect(() => {
-    console.log(products)
-  }, [products])
-
   return (
     <Layout>
       <div className={styles.header}>
         <div className={styles.header__left}>
           <h1>Find the natural remedy that is best for you!</h1>
           <p>Premium natural formula that helps your body feel its best</p>
-          <Link href='/products?collection=remedies'>Shop Now</Link>
+          <Link href='/products?collection=Remedies&price=&keyword='>
+            Shop Now
+          </Link>
         </div>
         <div className={styles.header__right_bottles}>
           <img src='/home/header-bottles.png' alt='Amish Remedy Bottles' />
@@ -53,10 +50,14 @@ export default function Home({ products }) {
           <p>
             All types of bird breeds and varieties available for hatching only
           </p>
-          <Link href='/products?collection=hatching-eggs'>Shop Now</Link>
+          <Link href='/products?collection=Hatching%20Eggs&price=&keyword='>
+            Shop Now
+          </Link>
         </div>
       </div>
-      <CollectionCarousel collection={products[1]} />
+      {products[1].products.edges.length > 0 && (
+        <CollectionCarousel collection={products[1]} />
+      )}
 
       <div className={styles.stats}>
         <div className={styles.stats__stat}>

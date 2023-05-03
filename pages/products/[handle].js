@@ -6,9 +6,6 @@ import styles from '../../styles/ProductPage.module.scss'
 export default function ProductPage({ product }) {
   const [cartItems, setCartItems] = useState(1)
 
-  useEffect(() => {
-    console.log(product)
-  }, [product])
   return (
     <Layout>
       <div className={styles.product}>
@@ -40,7 +37,6 @@ export async function getStaticPaths() {
   const paths = []
 
   pathsArray.forEach((path) => paths.push({ params: { handle: path } }))
-  console.log(paths)
 
   return {
     paths,

@@ -2,11 +2,13 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { authSlice } from './authSlice'
 import { createWrapper } from 'next-redux-wrapper'
 import { persistReducer, persistStore } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import storage from './createNoopStorage'
 import thunk from 'redux-thunk'
+import { cartSlice } from './cartSlice'
 
 const rootReducer = combineReducers({
   [authSlice.name]: authSlice.reducer,
+  [cartSlice.name]: cartSlice.reducer,
 })
 
 const makeConfiguredStore = () =>
@@ -23,6 +25,7 @@ export const makeStore = () => {
     // we need it only on client side
     const persistConfig = {
       key: 'nextjs',
+      whitelist: ['cart'],
       storage,
     }
     const persistedReducer = persistReducer(persistConfig, rootReducer)

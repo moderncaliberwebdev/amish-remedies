@@ -1,9 +1,19 @@
 import { useState } from 'react'
 import styles from '../styles/Layout.module.scss'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { selectCartState } from '../store/cartSlice'
+import { useSelector } from 'react-redux'
 
 export default function Layout({ children }) {
+  //get queries from url
+  const router = useRouter()
+
+  //redux state from cart
+  const cartState = useSelector(selectCartState)
+
   const [search, setSearch] = useState(false)
+  const [inputText, setInputText] = useState('')
 
   const toggleSearch = () => {
     const searchComponent = document.querySelector('#search')
@@ -11,6 +21,10 @@ export default function Layout({ children }) {
     searchComponent.style.top = !search ? 0 : '-20%'
 
     setSearch(!search)
+  }
+
+  const searchForKeyword = () => {
+    router.push(`/products?collection=&price=&keyword=${inputText}`)
   }
 
   return (
@@ -50,7 +64,7 @@ export default function Layout({ children }) {
             <Link href='/cart'>
               <div className={styles.nav__cart}>
                 <img src='/home/Shopping-Cart.png' alt='Cart' />
-                <p>10</p>
+                {cartState.items.length > 0 && <p>{cartState.items.length}</p>}
               </div>
             </Link>
           </li>
@@ -58,8 +72,14 @@ export default function Layout({ children }) {
       </nav>
       <div className={styles.search} id='search'>
         <div className={styles.search__searchbar}>
-          <input type='text' placeholder='Search Products...' />
-          <img src='/home/Search.png' alt='Search' />
+          <input
+            type='text'
+            placeholder='Search Products...'
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && searchForKeyword()}
+          />
+          <img src='/home/Search.png' alt='Search' onClick={searchForKeyword} />
         </div>
         <img
           src='/home/Close.png'

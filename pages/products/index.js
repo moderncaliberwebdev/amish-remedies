@@ -22,6 +22,13 @@ export default function Products({ products, collections }) {
   const [filterPrice, setFilterPrice] = useState('')
   const [filterKeyword, setFilterKeyword] = useState('')
 
+  //state for sorting products
+  const [productSortValue, setProductSortValue] = useState('Featured')
+
+  useEffect(() => {
+    console.log('display products >>>  ', displayProducts)
+  }, [displayProducts])
+
   //shows me products and collections gathered from graphql api
   useEffect(() => {
     setProductsFromAPI(products)
@@ -32,6 +39,11 @@ export default function Products({ products, collections }) {
   useEffect(() => {
     filterProducts()
   }, [filterCollectionName, filterPrice, filterKeyword])
+
+  //run sort function whenever the sort is requested
+  useEffect(() => {
+    productSort()
+  }, [productSortValue])
 
   //filter results on url update
   useEffect(() => {
@@ -124,6 +136,30 @@ export default function Products({ products, collections }) {
     String(query.price) === String(number)
       ? setFilterPrice('')
       : setFilterPrice(number)
+  }
+
+  //sort display products
+  const productSort = () => {
+    const tempArray = displayProducts
+    console.log(productSortValue)
+
+    if (productSortValue == 'Price: Low-High') {
+      tempArray.sort((a, b) => {
+        return (
+          parseFloat(a.node.priceRange.minVariantPrice.amount) -
+          parseFloat(b.node.priceRange.minVariantPrice.amount)
+        )
+      })
+    } else if (productSortValue == 'Price: High-Low') {
+      tempArray.sort((a, b) => {
+        return (
+          parseFloat(b.node.priceRange.minVariantPrice.amount) -
+          parseFloat(a.node.priceRange.minVariantPrice.amount)
+        )
+      })
+    }
+    console.log(tempArray)
+    setDisplayProducts(tempArray)
   }
 
   return (
@@ -233,25 +269,59 @@ export default function Products({ products, collections }) {
         <div className={styles.products__productlist}>
           <div className={styles.products__productlist__sort}>
             <label>Sort By:</label>
-            <select id='standard-select'>
+            <select
+              id='standard-select'
+              value={productSortValue}
+              onChange={(e) => setProductSortValue(e.target.value)}
+            >
               <option value='Featured'>Featured</option>
               <option value='Price: Low-High'>Price: Low-High</option>
               <option value='Price: High-Low'>Price: High-Low</option>
             </select>
           </div>
           <div className={styles.products__productlist__products}>
+            {/* if (productSortValue == 'Price: Low-High') {
+      tempArray.sort((a, b) => {
+        return (
+          parseFloat(a.node.priceRange.minVariantPrice.amount) -
+          parseFloat(b.node.priceRange.minVariantPrice.amount)
+        )
+      })
+    }  */}
             {displayProducts.length > 0 ? (
-              displayProducts.map((product) => {
-                return (
-                  <Product
-                    image={product.node.featuredImage.url}
-                    title={product.node.title}
-                    price={product.node.priceRange.minVariantPrice.amount}
-                    page={product.node.handle}
-                    key={product.node.handle}
-                  />
-                )
-              })
+              displayProducts
+                .sort((a, b) => {
+                  if (productSortValue == 'Price: Low-High') {
+                    return (
+                      parseFloat(a.node.priceRange.minVariantPrice.amount) -
+                      parseFloat(b.node.priceRange.minVariantPrice.amount)
+                    )
+                  } else if (productSortValue == 'Price: High-Low') {
+                    return (
+                      parseFloat(b.node.priceRange.minVariantPrice.amount) -
+                      parseFloat(a.node.priceRange.minVariantPrice.amount)
+                    )
+                  } else {
+                    if (a.node.title < b.node.title) {
+                      return -1
+                    }
+                    if (a.node.title > b.node.title) {
+                      return 1
+                    }
+                    return 0
+                  }
+                })
+                .map((product) => {
+                  return (
+                    <Product
+                      image={product.node.featuredImage.url}
+                      title={product.node.title}
+                      price={product.node.priceRange.minVariantPrice.amount}
+                      page={product.node.handle}
+                      key={product.node.handle}
+                    />
+                  )
+                })
             ) : (
               <p>No Products</p>
             )}

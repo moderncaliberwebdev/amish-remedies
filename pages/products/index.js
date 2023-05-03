@@ -24,12 +24,9 @@ export default function Products({ products, collections }) {
 
   //shows me products and collections gathered from graphql api
   useEffect(() => {
-    // console.log('products from graphql >>> ', products)
     setProductsFromAPI(products)
   }, [products])
-  useEffect(() => {
-    // console.log('collections form graphql >>> ', collections)
-  }, [collections])
+  useEffect(() => {}, [collections])
 
   //run filter function when one of the filters is changed
   useEffect(() => {
@@ -82,6 +79,29 @@ export default function Products({ products, collections }) {
         })
 
         //set filtered products to be the values of the temp array
+        filteredDisplayProducts = tempArray
+      }
+
+      //if there is a keyword filter, filer the remaining products by it
+      if (keywordFromQuery && keywordFromQuery.length > 0) {
+        const tempArray = []
+        setFilterKeyword(keywordFromQuery)
+
+        const options = {
+          keys: ['node.title'],
+          includeScore: true,
+          ignoreLocation: true,
+          threshold: 0.3,
+        }
+
+        const fuseProducts = new Fuse(filteredDisplayProducts, options)
+
+        const pattern = keywordFromQuery || ''
+
+        const productsSearch = fuseProducts.search(pattern)
+
+        productsSearch.forEach((product) => tempArray.push(product.item))
+
         filteredDisplayProducts = tempArray
       }
 

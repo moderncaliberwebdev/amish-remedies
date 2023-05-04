@@ -1,0 +1,133 @@
+@import 'variables';
+
+.cart {
+  margin-bottom: 10rem;
+
+  h1 {
+    font-size: $font-big-head;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    align-items: center;
+    margin: 10rem;
+
+    h2 {
+      font-size: $font-big-text;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem 3rem;
+      background-color: $secondary;
+      border-radius: 15px;
+      font-size: $font-text;
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #999999;
+    color: #999999;
+    margin: 2rem 0;
+    padding-bottom: 0.5rem;
+
+    h2 {
+      font-size: $font-text;
+      width: 10rem;
+
+      &:nth-of-type(2) {
+        margin-left: 45rem;
+      }
+      &:nth-of-type(3) {
+        flex-grow: 1;
+        text-align: right;
+      }
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &__product {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      font-size: $font-text;
+      flex-grow: 1;
+      align-items: center;
+      gap: 5rem;
+
+      img {
+        width: 15rem;
+        height: 15rem;
+        object-fit: contain;
+      }
+
+      h3 {
+        width: 30rem;
+      }
+
+      &__counter {
+        padding: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 20rem;
+        border: 2px solid #999;
+        border-radius: 15px;
+        height: 5rem;
+
+        img {
+          width: 3rem;
+          height: 3rem;
+          cursor: pointer;
+        }
+
+        p {
+          color: #999999;
+          font-size: $font-text;
+          margin: 0;
+        }
+      }
+
+      span {
+        justify-self: flex-end;
+        flex-grow: 1;
+        text-align: right;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__checkout {
+    margin-top: 5rem;
+    text-align: right;
+    font-size: $font-text;
+
+    p {
+      margin: 1rem 0;
+
+      span {
+        font-weight: 700;
+        margin-right: 2rem;
+      }
+    }
+
+    button {
+      color: #fff;
+      padding: 1.5rem 10rem;
+      background-color: $secondary;
+      font-size: $font-text;
+      border-style: none;
+      cursor: pointer;
+    }
+  }
+}

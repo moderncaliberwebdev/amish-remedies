@@ -16,10 +16,67 @@ export const cartSlice = createSlice({
       state.cartState = action.payload
     },
     addToCart(state, action) {
-      state.cartState.items.push(action.payload)
+      const item = action.payload
+
+      const existItem = state.cartState.items.find((x) => x.page == item.page)
+
+      //if item exists, increase the quantity instad of adding a new object
+      if (existItem) {
+        return {
+          ...state,
+          cartState: {
+            items: state.cartState.items.map((x) =>
+              x.page == existItem.page
+                ? {
+                    image: item.image,
+                    title: item.title,
+                    price: item.price,
+                    page: item.page,
+                    quantity: existItem.quantity + item.quantity,
+                  }
+                : x
+            ),
+          },
+        }
+      }
+      //if item doesn't exist, add it to cart
+      else {
+        state.cartState.items.push(action.payload)
+      }
     },
     removeFromCart(state, action) {
-      return state.cartState.items.filter((item) => item.id !== action.payload)
+      const item = action.payload
+
+      const existItem = state.cartState.items.find((x) => x.page == item.page)
+
+      //if item's quantity is 1 and it is decreased to 0 remove it
+      if (existItem.quantity == 1) {
+        return {
+          ...state,
+          cartState: {
+            items: state.cartState.items.filter((x) => x.page !== item.page),
+          },
+        }
+      }
+      // decrease item quantity
+      else {
+        return {
+          ...state,
+          cartState: {
+            items: state.cartState.items.map((x) =>
+              x.page == existItem.page
+                ? {
+                    image: item.image,
+                    title: item.title,
+                    price: item.price,
+                    page: item.page,
+                    quantity: existItem.quantity - 1,
+                  }
+                : x
+            ),
+          },
+        }
+      }
     },
   },
 

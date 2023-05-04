@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import styles from '../styles/ProductCard.module.scss'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../store/cartSlice'
+import { useRouter } from 'next/router'
 
 function ProductCard({ image, title, price, page }) {
+  const dispatch = useDispatch()
+  const router = useRouter()
+
   return (
     <div className={styles.card}>
       <Link href={`/products/${page}`}>
@@ -14,7 +20,23 @@ function ProductCard({ image, title, price, page }) {
           <h3>{title}</h3>
           <p>${price}</p>
         </Link>
-        <button onClick={() => alert('Product')}>Add to Cart</button>
+        <button
+          onClick={() => {
+            dispatch(
+              addToCart({
+                image,
+                title,
+                price,
+                page,
+                quantity: 1,
+              })
+            )
+
+            router.push('/cart')
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   )

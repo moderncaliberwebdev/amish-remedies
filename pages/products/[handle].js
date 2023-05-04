@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { getAllProducts, getProductByHandle } from '../../lib/shopify'
 import Layout from '../../Components/Layout'
 import styles from '../../styles/ProductPage.module.scss'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../store/cartSlice'
+import { useRouter } from 'next/router'
 
 export default function ProductPage({ product }) {
+  const dispatch = useDispatch()
+  const router = useRouter()
+
   const [cartItems, setCartItems] = useState(1)
+
+  const incrementCartItems = () => {
+    setCartItems(cartItems - 1)
+  }
 
   return (
     <Layout>
@@ -16,11 +26,35 @@ export default function ProductPage({ product }) {
           <h1>{product.title}</h1>
           <p>${product.priceRange.minVariantPrice.amount}</p>
           <div className={styles.product__details__counter}>
-            <img src='/product/minus.png' alt='Minus Item' />
+            <img
+              src='/product/minus.png'
+              alt='Minus Item'
+              onClick={() => cartItems > 0 && setCartItems(cartItems - 1)}
+            />
             <p>{cartItems}</p>
-            <img src='/product/plus.png' alt='Plus Item' />
+            <img
+              src='/product/plus.png'
+              alt='Plus Item'
+              onClick={() => cartItems < 100 && setCartItems(cartItems + 1)}
+            />
           </div>
-          <button>Add to Cart</button>
+          <button
+            onClick={() => {
+              dispatch(
+                addToCart({
+                  image: product.images.nodes[0].url,
+                  title: product.title,
+                  price: product.priceRange.minVariantPrice.amount,
+                  page: product.handle,
+                  quantity: cartItems,
+                })
+              )
+
+              router.push('/cart')
+            }}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
       <div

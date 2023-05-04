@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { selectCartState } from '../store/cartSlice'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 export default function Layout({ children }) {
   //get queries from url
@@ -12,8 +13,24 @@ export default function Layout({ children }) {
   //redux state from cart
   const cartState = useSelector(selectCartState)
 
+  //how many items are in the cart
+  const [cartLength, setCartLength] = useState(0)
+
   const [search, setSearch] = useState(false)
   const [inputText, setInputText] = useState('')
+
+  //update cart length when cart is updated
+  useEffect(() => {
+    let tempCartLength = 0
+
+    if (cartState.items.length > 0) {
+      cartState.items.forEach((item) => {
+        tempCartLength += item.quantity
+      })
+    }
+
+    setCartLength(tempCartLength)
+  }, [cartState])
 
   const toggleSearch = () => {
     const searchComponent = document.querySelector('#search')
@@ -64,7 +81,7 @@ export default function Layout({ children }) {
             <Link href='/cart'>
               <div className={styles.nav__cart}>
                 <img src='/home/Shopping-Cart.png' alt='Cart' />
-                {cartState.items.length > 0 && <p>{cartState.items.length}</p>}
+                {cartLength > 0 && <p>{cartLength}</p>}
               </div>
             </Link>
           </li>

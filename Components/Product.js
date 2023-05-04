@@ -2,9 +2,11 @@ import Link from 'next/link'
 import styles from '../styles/Product.module.scss'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../store/cartSlice'
+import { useRouter } from 'next/router'
 
 function ProductCard({ image, title, price, page }) {
   const dispatch = useDispatch()
+  const router = useRouter()
 
   return (
     <div className={styles.card}>
@@ -19,7 +21,19 @@ function ProductCard({ image, title, price, page }) {
           <p>${price}</p>
         </Link>
         <button
-          onClick={() => dispatch(addToCart({ image, title, price, page }))}
+          onClick={() => {
+            dispatch(
+              addToCart({
+                image,
+                title,
+                price,
+                page,
+                quantity: 1,
+              })
+            )
+
+            router.push('/cart')
+          }}
         >
           Add to Cart
         </button>

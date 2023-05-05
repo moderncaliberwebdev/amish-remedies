@@ -27,7 +27,6 @@ export default function Cart({ variants }) {
     setSubTotal(tempSubTotal.toFixed(2))
   }, [cartState])
 
-  //   const createNewCheckout = async () => {
   async function createNewCheckout() {
     const lineItems = []
 

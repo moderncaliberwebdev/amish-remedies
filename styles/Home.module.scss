@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .header {
   display: flex;
@@ -16,6 +17,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+
+    @include respond(tab) {
+      width: 80%;
+    }
+    @include respond(tab-port) {
+      display: none;
+    }
 
     &:nth-of-type(2) {
       text-align: right;
@@ -55,10 +63,27 @@
     margin-right: 10rem;
     margin-top: -20rem;
 
+    @include respond(tab) {
+      width: 20%;
+    }
+    @include respond(tab) {
+      margin: 0 auto;
+      width: auto;
+    }
+
     img {
       height: 110rem;
       object-fit: cover;
       object-position: center;
+
+      @include respond(tab) {
+        height: 90rem;
+      }
+      @include respond(tab-port) {
+        height: 150%;
+        display: block;
+        margin: 0 auto;
+      }
     }
   }
   &__right_eggs {
@@ -66,10 +91,47 @@
     position: relative;
     margin: auto 0 auto 5rem;
 
+    @include respond(tab) {
+      width: 20%;
+    }
+
     img {
       height: 40rem;
       object-fit: cover;
       object-position: center;
+
+      @include respond(tab) {
+        height: 25rem;
+        left: -5rem;
+      }
+    }
+  }
+}
+
+.mobile__header {
+  display: none;
+
+  @include respond(tab-port) {
+    display: block;
+
+    h1 {
+      font-size: $font-big-head;
+    }
+    p {
+      font-size: $font-text;
+      font-family: Georgia;
+      margin: 2rem 0;
+      width: 70%;
+    }
+    a {
+      font-size: $font-text;
+      background-color: $secondary;
+      color: #000;
+      text-decoration: none;
+      padding: 2rem 5rem;
+      display: inline-block;
+      font-weight: bold;
+      width: 20rem;
     }
   }
 }
@@ -81,6 +143,10 @@
   background-color: $secondary;
   width: 100vw;
   margin: 10rem 0 0 -8rem;
+
+  @include respond(tab-port) {
+    margin: 10rem 0 0 -5rem;
+  }
 
   padding: 5rem 0;
 
@@ -114,6 +180,10 @@
   width: 100vw;
   overflow: hidden;
   padding-bottom: 20rem;
+
+  @include respond(tab-port) {
+    margin: 10rem 0 0 -5rem;
+  }
 
   &__graphic {
     background-color: $red;

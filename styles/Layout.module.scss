@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .nav {
   ul {
@@ -10,11 +11,31 @@
     font-family: Georgia;
     font-size: $font-text;
 
+    .nav__mobile {
+      display: none;
+      @include respond(tab-port) {
+        display: block;
+      }
+    }
+
+    .nav__desktop {
+      @include respond(tab-port) {
+        display: none;
+      }
+    }
+
     li {
       a {
         text-decoration: none;
         color: #000;
       }
+
+      @include respond(tab) {
+        .nav__logo {
+          width: 15rem;
+        }
+      }
+
       .nav__search {
         cursor: pointer;
       }
@@ -113,6 +134,11 @@
   width: 100vw;
   margin-left: -8rem;
   padding: 8rem;
+
+  @include respond(tab-port) {
+    padding: 5rem;
+    margin-left: -5rem;
+  }
 
   &__top {
     display: flex;

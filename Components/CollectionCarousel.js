@@ -97,13 +97,6 @@ function CollectionCarousel({ collection }) {
               />
             )
           })}
-          {/* <ProductCard
-            image={
-              'https://cdn.shopify.com/s/files/1/0740/2494/3921/products/s-l1600-1.png?v=1679603451'
-            }
-            title={'Test'}
-            price={20}
-          />
           <ProductCard
             image={
               'https://cdn.shopify.com/s/files/1/0740/2494/3921/products/s-l1600-1.png?v=1679603451'
@@ -124,7 +117,14 @@ function CollectionCarousel({ collection }) {
             }
             title={'Test'}
             price={20}
-          /> */}
+          />
+          <ProductCard
+            image={
+              'https://cdn.shopify.com/s/files/1/0740/2494/3921/products/s-l1600-1.png?v=1679603451'
+            }
+            title={'Test'}
+            price={20}
+          />
         </div>
       </div>
     </div>

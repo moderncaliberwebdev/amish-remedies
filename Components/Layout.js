@@ -2,11 +2,14 @@ import { useState } from 'react'
 import styles from '../styles/Layout.module.scss'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { selectCartState } from '../store/cartSlice'
-import { useSelector } from 'react-redux'
+import { clearCart, selectCartState } from '../store/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { cartExists } from '../lib/shopify'
 
 export default function Layout({ children }) {
+  const dispatch = useDispatch()
+
   //get queries from url
   const router = useRouter()
 
@@ -19,8 +22,8 @@ export default function Layout({ children }) {
   const [search, setSearch] = useState(false)
   const [inputText, setInputText] = useState('')
 
-  //update cart length when cart is updated
   useEffect(() => {
+    //update cart length when cart is updated
     let tempCartLength = 0
 
     if (cartState.items.length > 0) {
@@ -30,6 +33,19 @@ export default function Layout({ children }) {
     }
 
     setCartLength(tempCartLength)
+
+    //clear cart after user reopens website after checkout
+    const checkCartExists = async () => {
+      if (cartState.cartId.length > 0) {
+        const cartExistsResponse = await cartExists(cartState.cartId)
+
+        console.log(cartExistsResponse)
+        if (cartExistsResponse.cart == null) {
+          dispatch(clearCart())
+        }
+      }
+    }
+    checkCartExists()
   }, [cartState])
 
   const toggleSearch = () => {
@@ -50,16 +66,21 @@ export default function Layout({ children }) {
         <ul>
           <li>
             <img
-              className={styles.nav__search}
+              className={`${styles.nav__search} ${styles.nav__desktop}`}
               src='/home/Search.png'
               alt='Search'
               onClick={toggleSearch}
             />
+            <img
+              className={`${styles.nav__search} ${styles.nav__mobile}`}
+              src='/home/menu.png'
+              alt='Search'
+            />
           </li>
-          <li>
+          <li className={styles.nav__desktop}>
             <Link href='/products'>Products</Link>
           </li>
-          <li>
+          <li className={styles.nav__desktop}>
             <Link href='/categories'>Shop by Category</Link>
           </li>
           <li>
@@ -71,10 +92,10 @@ export default function Layout({ children }) {
               />
             </Link>
           </li>
-          <li>
+          <li className={styles.nav__desktop}>
             <Link href='/learn'>Learn</Link>
           </li>
-          <li>
+          <li className={styles.nav__desktop}>
             <Link href='/contact'>Contact Us</Link>
           </li>
           <li>

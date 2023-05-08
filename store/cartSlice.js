@@ -3,7 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper'
 
 // Initial state
 const initialState = {
-  cartState: { items: [] },
+  cartState: { items: [], cartId: '' },
 }
 
 // Actual Slice
@@ -11,10 +11,6 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // Action to set the cart status
-    setCartState(state, action) {
-      state.cartState = action.payload
-    },
     addToCart(state, action) {
       const item = action.payload
 
@@ -36,6 +32,7 @@ export const cartSlice = createSlice({
                   }
                 : x
             ),
+            cartId: state.cartState.cartId,
           },
         }
       }
@@ -55,6 +52,7 @@ export const cartSlice = createSlice({
           ...state,
           cartState: {
             items: state.cartState.items.filter((x) => x.page !== item.page),
+            cartId: state.cartState.cartId,
           },
         }
       }
@@ -74,8 +72,27 @@ export const cartSlice = createSlice({
                   }
                 : x
             ),
+            cartId: state.cartState.cartId,
           },
         }
+      }
+    },
+    addCartId(state, action) {
+      return {
+        ...state,
+        cartState: {
+          items: state.cartState.items,
+          cartId: action.payload,
+        },
+      }
+    },
+    clearCart(state, action) {
+      return {
+        ...state,
+        cartState: {
+          items: [],
+          cartId: '',
+        },
       }
     },
   },
@@ -91,7 +108,8 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { setCartState, addToCart, removeFromCart } = cartSlice.actions
+export const { setCartState, addToCart, removeFromCart, addCartId, clearCart } =
+  cartSlice.actions
 
 export const selectCartState = (state) => state.cart.cartState
 

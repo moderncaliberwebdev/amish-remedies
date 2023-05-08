@@ -25,9 +25,9 @@ body {
   padding: 3rem 8rem 0 8rem;
 
   @include respond(tab-port) {
-    padding: 2rem 5rem;
+    padding: 2rem 5rem 0 5rem;
   }
   @include respond(phone) {
-    padding: 2rem;
+    padding: 2rem 2rem 0 2rem;
   }
 }

@@ -2,11 +2,16 @@ import React from 'react'
 import styles from '../styles/Cart.module.scss'
 import Layout from '../Components/Layout'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, removeFromCart, selectCartState } from '../store/cartSlice'
+import {
+  addCartId,
+  addToCart,
+  removeFromCart,
+  selectCartState,
+} from '../store/cartSlice'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { createCheckout, getProductVariants } from '../lib/shopify'
+import { createCart, createCheckout, getProductVariants } from '../lib/shopify'
 import { useRouter } from 'next/router'
 
 export default function Cart({ variants }) {
@@ -45,10 +50,13 @@ export default function Cart({ variants }) {
 
     console.log(lineItems)
 
-    const checkoutResponse = await createCheckout(lineItems)
+    // const checkoutResponse = await createCheckout(lineItems)
+    const checkoutResponse = await createCart(lineItems)
+
+    dispatch(addCartId(checkoutResponse.cartCreate.cart.id))
 
     document.querySelector('#checkoutButton').textContent = 'Loading...'
-    router.push(checkoutResponse)
+    router.push(checkoutResponse.cartCreate.cart.checkoutUrl)
   }
 
   return (

@@ -42,6 +42,15 @@ export default function Home({ products }) {
           </Link>
         </div>
       </div>
+      <div className={styles.mobile__header}>
+        <h1>Find our fertile hatching eggs ready to incubate</h1>
+        <p>
+          All types of bird breeds and varieties available for hatching only
+        </p>
+        <Link href='/products?collection=Hatching%20Eggs&price=&keyword='>
+          Shop Now
+        </Link>
+      </div>
       {products[1].products.edges.length > 0 && (
         <CollectionCarousel collection={products[1]} />
       )}

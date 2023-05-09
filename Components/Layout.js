@@ -21,6 +21,7 @@ export default function Layout({ children }) {
 
   const [search, setSearch] = useState(false)
   const [inputText, setInputText] = useState('')
+  const [smallNav, setSmallNav] = useState(false)
 
   useEffect(() => {
     //update cart length when cart is updated
@@ -39,7 +40,6 @@ export default function Layout({ children }) {
       if (cartState.cartId.length > 0) {
         const cartExistsResponse = await cartExists(cartState.cartId)
 
-        console.log(cartExistsResponse)
         if (cartExistsResponse.cart == null) {
           dispatch(clearCart())
         }
@@ -60,6 +60,14 @@ export default function Layout({ children }) {
     router.push(`/products?collection=&price=&keyword=${inputText}`)
   }
 
+  const toggleSmallNav = () => {
+    const smallNavHtml = document.querySelector('#smallnav')
+
+    smallNavHtml.style.display = smallNav ? 'none' : 'block'
+
+    setSmallNav(!smallNav)
+  }
+
   return (
     <>
       <nav className={styles.nav}>
@@ -75,6 +83,7 @@ export default function Layout({ children }) {
               className={`${styles.nav__search} ${styles.nav__mobile}`}
               src='/home/menu.png'
               alt='Search'
+              onClick={toggleSmallNav}
             />
           </li>
           <li className={styles.nav__desktop}>
@@ -108,6 +117,37 @@ export default function Layout({ children }) {
           </li>
         </ul>
       </nav>
+      <nav className={styles.smallnav} id='smallnav'>
+        <div className={styles.smallnav__top} onClick={toggleSmallNav}></div>
+        <div className={styles.smallnav__bottom}>
+          <ul>
+            <li>
+              <img src='/home/Search-white.png' alt='Search' />
+              <input
+                type='text'
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && searchForKeyword()}
+              />
+            </li>
+            <li>
+              <Link href='/'>Home</Link>
+            </li>
+            <li>
+              <Link href='/products'>Products</Link>
+            </li>
+            <li>
+              <Link href='/categories'>Shop by Category</Link>
+            </li>
+            <li>
+              <Link href='/learn'>Learn</Link>
+            </li>
+            <li>
+              <Link href='/contact'>Contact Us</Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <div className={styles.search} id='search'>
         <div className={styles.search__searchbar}>
           <input
@@ -129,6 +169,7 @@ export default function Layout({ children }) {
       <footer className={styles.footer}>
         <div className={styles.footer__top}>
           <img src='/home/logo.png' alt='Old Amish Remedies Plus Logo' />
+
           <ul>
             <li>
               <Link href='/products'>Products</Link>

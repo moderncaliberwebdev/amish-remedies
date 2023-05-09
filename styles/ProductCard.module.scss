@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .card {
   width: 35rem;
@@ -8,11 +9,29 @@
   position: relative;
   scroll-snap-align: center;
 
+  @include respond(phone) {
+    width: 30rem;
+  }
+
   &:first-of-type {
     margin-left: 8rem;
+
+    @include respond(tab-port) {
+      margin-left: 5rem;
+    }
+    @include respond(phone) {
+      margin-left: 2rem;
+    }
   }
   &:last-of-type {
     margin-right: 8rem;
+
+    @include respond(tab-port) {
+      margin-right: 5rem;
+    }
+    @include respond(phone) {
+      margin-right: 2rem;
+    }
   }
 
   &__img {

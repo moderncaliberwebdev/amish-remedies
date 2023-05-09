@@ -19,11 +19,18 @@
         transform: translateY(-50%);
         cursor: pointer;
 
+        @include respond(phone) {
+          width: 5rem;
+        }
+
         &:first-of-type {
           left: -8rem;
 
           @include respond(tab-port) {
             left: -5rem;
+          }
+          @include respond(phone) {
+            left: -2rem;
           }
         }
         &:last-of-type {
@@ -31,6 +38,9 @@
 
           @include respond(tab-port) {
             right: -5rem;
+          }
+          @include respond(phone) {
+            right: -2rem;
           }
         }
       }
@@ -52,6 +62,9 @@
 
       @include respond(tab-port) {
         margin: -6rem 0 -6rem -5rem;
+      }
+      @include respond(phone) {
+        margin: -6rem 0 -6rem -2rem;
       }
     }
   }

@@ -66,7 +66,7 @@
     @include respond(tab) {
       width: 20%;
     }
-    @include respond(tab) {
+    @include respond(tab-port) {
       margin: 0 auto;
       width: auto;
     }
@@ -94,6 +94,16 @@
     @include respond(tab) {
       width: 20%;
     }
+    @include respond(tab-port) {
+      margin: 0 auto;
+      width: auto;
+    }
+    @include respond(phone) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
     img {
       height: 40rem;
@@ -103,6 +113,15 @@
       @include respond(tab) {
         height: 25rem;
         left: -5rem;
+      }
+      @include respond(tab-port) {
+        height: 100%;
+      }
+      @include respond(phone) {
+        height: auto;
+        width: 90%;
+        display: block;
+        margin: auto;
       }
     }
   }
@@ -116,6 +135,10 @@
 
     h1 {
       font-size: $font-big-head;
+
+      @include respond(phone) {
+        font-size: $font-med-head;
+      }
     }
     p {
       font-size: $font-text;
@@ -143,20 +166,32 @@
   background-color: $secondary;
   width: 100vw;
   margin: 10rem 0 0 -8rem;
+  padding: 5rem 0;
 
   @include respond(tab-port) {
     margin: 10rem 0 0 -5rem;
   }
-
-  padding: 5rem 0;
+  @include respond(phone) {
+    flex-direction: column;
+    align-items: center;
+    margin: 10rem 0 0 -2rem;
+  }
 
   &__stat {
     display: flex;
     flex-direction: row;
     align-items: center;
 
+    @include respond(phone) {
+      margin: 2rem 0;
+    }
+
     img {
       width: 15rem;
+
+      @include respond(tab-port) {
+        width: 10rem;
+      }
     }
     div {
       h3 {
@@ -184,6 +219,10 @@
   @include respond(tab-port) {
     margin: 10rem 0 0 -5rem;
   }
+  @include respond(phone) {
+    flex-direction: column;
+    margin: 10rem 0 0 -2rem;
+  }
 
   &__graphic {
     background-color: $red;
@@ -193,6 +232,19 @@
     position: relative;
     z-index: 10;
     border-radius: 15px;
+
+    @include respond(tab-port) {
+      width: 50%;
+    }
+    @include respond(phone) {
+      width: 90%;
+
+      img {
+        height: 120%;
+        display: block;
+        margin: 0 auto;
+      }
+    }
   }
 
   &__info {
@@ -203,6 +255,15 @@
     padding: 2rem;
     width: 30rem;
     border-radius: 0 15px 15px 0;
+
+    @include respond(tab-port) {
+      width: 40%;
+    }
+    @include respond(phone) {
+      width: 100%;
+      border-radius: 0;
+      margin-top: 5rem;
+    }
 
     h2 {
       font-size: $font-small-head;
@@ -222,11 +283,19 @@
     z-index: 1;
     left: -10rem;
     top: 5rem;
+
+    @include respond(tab-port) {
+      display: none;
+    }
   }
   &__apple {
     position: absolute;
     z-index: 1;
     right: -35rem;
     top: 20rem;
+
+    @include respond(tab-port) {
+      display: none;
+    }
   }
 }

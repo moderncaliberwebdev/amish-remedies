@@ -11,12 +11,21 @@
   overflow: hidden;
   margin-bottom: 5rem;
 
+  @include respond(phone) {
+    flex-direction: column;
+    height: 30rem;
+  }
+
   &__left {
     width: 70%;
     padding: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @include respond(phone) {
+      width: 100%;
+    }
 
     &:nth-of-type(2) {
       text-align: right;
@@ -56,10 +65,20 @@
     margin-right: 10rem;
     margin-top: -5%;
 
+    @include respond(phone) {
+      width: 100%;
+    }
     img {
       height: 140%;
       object-fit: cover;
       object-position: center;
+
+      @include respond(phone) {
+        position: absolute;
+        top: -10rem;
+        right: 0;
+        height: 30rem;
+      }
     }
   }
 }

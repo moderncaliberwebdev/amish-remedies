@@ -5,6 +5,7 @@ import { getAllProducts, getCollections } from '../../lib/shopify'
 import Product from '../../Components/Product'
 import { useRouter } from 'next/router'
 import Fuse from 'fuse.js'
+import { useMediaQuery } from 'react-responsive'
 
 export default function Products({ products, collections }) {
   //get queries from url
@@ -25,6 +26,10 @@ export default function Products({ products, collections }) {
 
   //state for sorting products
   const [productSortValue, setProductSortValue] = useState('Featured')
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1000px)',
+  })
 
   //shows me products and collections gathered from graphql api
   useEffect(() => {
@@ -116,6 +121,23 @@ export default function Products({ products, collections }) {
     }
   }, [query, productsFromAPI])
 
+  //sets filter to open when switching to desktop
+  useEffect(() => {
+    const filters = document.querySelector('#filters')
+    const expand = document.querySelector('#expand')
+    if (!isMobile) {
+      filters.style.display = 'block'
+      filters.style.maxHeight = '50rem'
+
+      expand.style.transform = 'rotate(0deg)'
+
+      setFilterOpen(false)
+    } else {
+      filters.style.display = 'none'
+      filters.style.maxHeight = '0'
+    }
+  }, [isMobile])
+
   //send user to filtered product page when clicked by a filter
   const filterProducts = () => {
     router.push(
@@ -130,16 +152,20 @@ export default function Products({ products, collections }) {
       : setFilterPrice(number)
   }
 
+  //toggle mobile filter
   const toggleFilter = () => {
-    const filters = document.querySelector('#filters')
-    const expand = document.querySelector('#expand')
+    if (isMobile) {
+      console.log('toggle filter')
+      const filters = document.querySelector('#filters')
+      const expand = document.querySelector('#expand')
 
-    filters.style.display = filterOpen ? 'none' : 'block'
-    filters.style.maxHeight = filterOpen ? '0' : '50rem'
+      filters.style.display = filterOpen ? 'none' : 'block'
+      filters.style.maxHeight = filterOpen ? '0' : '50rem'
 
-    expand.style.transform = filterOpen ? 'rotate(0deg)' : 'rotate(180deg)'
+      expand.style.transform = filterOpen ? 'rotate(0deg)' : 'rotate(180deg)'
 
-    setFilterOpen(!filterOpen)
+      setFilterOpen(!filterOpen)
+    }
   }
 
   return (

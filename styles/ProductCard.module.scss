@@ -39,6 +39,10 @@
       height: 30rem;
       width: 35rem;
       object-fit: contain;
+
+      @include respond(phone) {
+        width: 30rem;
+      }
     }
   }
   &__info {

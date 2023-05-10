@@ -247,9 +247,11 @@
       width: 90%;
 
       img {
-        height: 120%;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
         display: block;
-        margin: 0 auto;
+        margin: auto;
       }
     }
   }

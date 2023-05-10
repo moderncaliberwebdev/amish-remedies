@@ -290,7 +290,7 @@
   &__gummies {
     position: absolute;
     z-index: 1;
-    left: -10rem;
+    left: 0;
     top: 5rem;
 
     @include respond(tab-port) {
@@ -300,7 +300,7 @@
   &__apple {
     position: absolute;
     z-index: 1;
-    right: -35rem;
+    right: -15rem;
     top: 20rem;
 
     @include respond(tab-port) {

@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .header {
   display: flex;
@@ -71,65 +72,99 @@
   width: 100%;
   margin-bottom: 5rem;
 
+  @include respond(tab) {
+    flex-direction: column;
+  }
+
   &__filter {
     min-width: 20rem;
     border-radius: 10px;
     border: 1px solid #cccccc;
     height: 100%;
 
-    h2 {
-      font-size: $font-big-text;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #cccc;
-    }
+    &__header {
+      @include respond(tab) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
 
-    &__search {
-      position: relative;
-      border-bottom: 1px solid #cccc;
+      h2 {
+        font-size: $font-big-text;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #cccc;
 
-      input {
-        border-style: none;
-        border-bottom: 1px solid #000;
-        display: block;
-        margin: 1rem 2rem;
-        padding: 1rem 3rem 1rem 1rem;
-        width: 80%;
-        height: 3rem;
-
-        &:focus {
-          outline: none;
+        @include respond(tab) {
+          border-bottom: none;
         }
       }
 
       img {
-        height: 3rem;
-        width: 4rem;
-        position: absolute;
-        margin: auto 0;
-        padding: 0.5rem 1rem;
-        right: 1rem;
-        top: 0;
-        cursor: pointer;
+        display: none;
+
+        @include respond(tab) {
+          display: block;
+          margin-right: 2rem;
+          object-fit: contain;
+          cursor: pointer;
+        }
       }
     }
+    &__filters {
+      @include respond(tab) {
+        display: none;
+        max-height: 0;
+      }
 
-    h3 {
-      font-size: $font-text;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      font-weight: 700;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #cccc;
-    }
+      &__search {
+        position: relative;
+        border-bottom: 1px solid #cccc;
 
-    &__options {
-      p {
+        input {
+          border-style: none;
+          border-bottom: 1px solid #000;
+          display: block;
+          margin: 1rem 2rem;
+          padding: 1rem 3rem 1rem 1rem;
+          width: 80%;
+          height: 3rem;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        img {
+          height: 3rem;
+          width: 4rem;
+          position: absolute;
+          margin: auto 0;
+          padding: 0.5rem 1rem;
+          right: 1rem;
+          top: 0;
+          cursor: pointer;
+        }
+      }
+
+      h3 {
         font-size: $font-text;
-        padding: 1rem 2rem;
         font-family: Georgia, 'Times New Roman', Times, serif;
-        cursor: pointer;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #cccc;
+      }
 
-        &:last-of-type {
-          border-bottom: 1px solid #cccc;
+      &__options {
+        p {
+          font-size: $font-text;
+          padding: 1rem 2rem;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          cursor: pointer;
+
+          &:last-of-type {
+            border-bottom: 1px solid #cccc;
+          }
         }
       }
     }

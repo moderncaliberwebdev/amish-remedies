@@ -21,6 +21,7 @@ export default function Products({ products, collections }) {
   const [filterCollectionName, setFilterCollectionName] = useState('')
   const [filterPrice, setFilterPrice] = useState('')
   const [filterKeyword, setFilterKeyword] = useState('')
+  const [filterOpen, setFilterOpen] = useState(false)
 
   //state for sorting products
   const [productSortValue, setProductSortValue] = useState('Featured')
@@ -129,6 +130,18 @@ export default function Products({ products, collections }) {
       : setFilterPrice(number)
   }
 
+  const toggleFilter = () => {
+    const filters = document.querySelector('#filters')
+    const expand = document.querySelector('#expand')
+
+    filters.style.display = filterOpen ? 'none' : 'block'
+    filters.style.maxHeight = filterOpen ? '0' : '50rem'
+
+    expand.style.transform = filterOpen ? 'rotate(0deg)' : 'rotate(180deg)'
+
+    setFilterOpen(!filterOpen)
+  }
+
   return (
     <Layout>
       <div className={styles.header}>
@@ -156,81 +169,89 @@ export default function Products({ products, collections }) {
       </div>
       <div className={styles.products}>
         <div className={styles.products__filter}>
-          <h2>Filters</h2>
-          <div className={styles.products__filter__search}>
-            <input
-              type='text'
-              placeholder='Keyword Search'
-              onChange={(e) => setFilterKeyword(e.target.value)}
-              value={filterKeyword}
-            />
-            <img src='/home/Search.png' alt='Search' />
+          <div
+            className={styles.products__filter__header}
+            onClick={toggleFilter}
+          >
+            <h2>Filters</h2>
+            <img src='/products/expand.png' alt='Expand Arrow' id='expand' />
           </div>
-          <h3>Product Type</h3>
-          <div className={styles.products__filter__options}>
-            {collections.map((collectionName) => {
-              return (
-                <p
-                  onClick={() =>
-                    String(query.collection) === String(collectionName.title)
-                      ? setFilterCollectionName('')
-                      : setFilterCollectionName(collectionName.title)
-                  }
-                  key={collectionName.title}
-                  style={{
-                    color:
-                      query.collection &&
-                      collectionName.title == query.collection &&
-                      '#ebb54a',
-                  }}
-                >
-                  {collectionName.title}
-                </p>
-              )
-            })}
-          </div>
-          <h3>Price</h3>
-          <div className={styles.products__filter__options}>
-            <p
-              onClick={() => filterListener(0)}
-              style={{
-                color: query.price && query.price == 0 && '#ebb54a',
-              }}
-            >
-              $0-$10
-            </p>
-            <p
-              onClick={() => filterListener(10)}
-              style={{
-                color: query.price && query.price == 10 && '#ebb54a',
-              }}
-            >
-              $10-$20
-            </p>
-            <p
-              onClick={() => filterListener(20)}
-              style={{
-                color: query.price && query.price == 20 && '#ebb54a',
-              }}
-            >
-              $20-$30
-            </p>
-            <p
-              onClick={() => filterListener(30)}
-              style={{
-                color: query.price && query.price == 30 && '#ebb54a',
-              }}
-            >
-              $30-$40
-            </p>
-            <p
-              onClick={() => filterListener(40)}
-              style={{
-                color: query.price && query.price == 40 && '#ebb54a',
-              }}
-            >
-              $40+
-            </p>
+          <div className={styles.products__filter__filters} id='filters'>
+            <div className={styles.products__filter__filters__search}>
+              <input
+                type='text'
+                placeholder='Keyword Search'
+                onChange={(e) => setFilterKeyword(e.target.value)}
+                value={filterKeyword}
+              />
+              <img src='/home/Search.png' alt='Search' />
+            </div>
+            <h3>Product Type</h3>
+            <div className={styles.products__filter__filters__options}>
+              {collections.map((collectionName) => {
+                return (
+                  <p
+                    onClick={() =>
+                      String(query.collection) === String(collectionName.title)
+                        ? setFilterCollectionName('')
+                        : setFilterCollectionName(collectionName.title)
+                    }
+                    key={collectionName.title}
+                    style={{
+                      color:
+                        query.collection &&
+                        collectionName.title == query.collection &&
+                        '#ebb54a',
+                    }}
+                  >
+                    {collectionName.title}
+                  </p>
+                )
+              })}
+            </div>
+            <h3>Price</h3>
+            <div className={styles.products__filter__filters__options}>
+              <p
+                onClick={() => filterListener(0)}
+                style={{
+                  color: query.price && query.price == 0 && '#ebb54a',
+                }}
+              >
+                $0-$10
+              </p>
+              <p
+                onClick={() => filterListener(10)}
+                style={{
+                  color: query.price && query.price == 10 && '#ebb54a',
+                }}
+              >
+                $10-$20
+              </p>
+              <p
+                onClick={() => filterListener(20)}
+                style={{
+                  color: query.price && query.price == 20 && '#ebb54a',
+                }}
+              >
+                $20-$30
+              </p>
+              <p
+                onClick={() => filterListener(30)}
+                style={{
+                  color: query.price && query.price == 30 && '#ebb54a',
+                }}
+              >
+                $30-$40
+              </p>
+              <p
+                onClick={() => filterListener(40)}
+                style={{
+                  color: query.price && query.price == 40 && '#ebb54a',
+                }}
+              >
+                $40+
+              </p>
+            </div>
           </div>
         </div>
         <div className={styles.products__productlist}>

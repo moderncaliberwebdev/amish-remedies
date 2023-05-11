@@ -1,0 +1,14 @@
+@import 'variables';
+
+.terms {
+  h1 {
+    font-size: $font-big-head;
+  }
+  h2 {
+    margin: 3rem 0 2rem 0;
+    font-size: $font-big-text;
+  }
+  p {
+    font-size: $font-text;
+  }
+}

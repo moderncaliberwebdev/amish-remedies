@@ -13,6 +13,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { createCart, createCheckout, getProductVariants } from '../lib/shopify'
 import { useRouter } from 'next/router'
+import { useMediaQuery } from 'react-responsive'
 
 export default function Cart({ variants }) {
   const cartState = useSelector(selectCartState)
@@ -20,6 +21,10 @@ export default function Cart({ variants }) {
   const router = useRouter()
 
   const [subTotal, setSubTotal] = useState(0)
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 900px)',
+  })
 
   //calculate subtotal
   useEffect(() => {
@@ -83,47 +88,113 @@ export default function Cart({ variants }) {
               <h2>Price</h2>
             </div>
             <div className={styles.cart__items}>
-              {cartState.items.map((item) => {
-                return (
-                  <div className={styles.cart__items__product} key={item.page}>
-                    <img src={item.image} alt={item.title} />
-                    <h3>{item.title}</h3>
-                    <div className={styles.cart__items__product__counter}>
-                      <img
-                        src='/product/minus.png'
-                        alt='Minus Item'
-                        onClick={() => {
-                          dispatch(
-                            removeFromCart({
-                              image: item.image,
-                              title: item.title,
-                              price: item.price,
-                              page: item.page,
-                            })
-                          )
-                        }}
-                      />
-                      <p>{item.quantity}</p>
-                      <img
-                        src='/product/plus.png'
-                        alt='Plus Item'
-                        onClick={() =>
-                          dispatch(
-                            addToCart({
-                              image: item.image,
-                              title: item.title,
-                              price: item.price,
-                              page: item.page,
-                              quantity: 1,
-                            })
-                          )
-                        }
-                      />
-                    </div>
-                    <span>${item.price}</span>
-                  </div>
-                )
-              })}
+              {isMobile
+                ? cartState.items.map((item) => {
+                    return (
+                      <div
+                        className={styles.cart__items__product}
+                        key={item.page}
+                      >
+                        <div className={styles.cart__items__product__top}>
+                          <div
+                            className={styles.cart__items__product__top__left}
+                          >
+                            <Link href={`/products/${item.page}`}>
+                              <img src={item.image} alt={item.title} />
+                            </Link>
+                          </div>
+                          <div
+                            className={styles.cart__items__product__top__right}
+                          >
+                            <Link href={`/products/${item.page}`}>
+                              <h3>{item.title}</h3>
+                            </Link>
+                            <span>${item.price}</span>
+                          </div>
+                        </div>
+                        <div className={styles.cart__items__product__counter}>
+                          <img
+                            src='/product/minus.png'
+                            alt='Minus Item'
+                            onClick={() => {
+                              dispatch(
+                                removeFromCart({
+                                  image: item.image,
+                                  title: item.title,
+                                  price: item.price,
+                                  page: item.page,
+                                })
+                              )
+                            }}
+                          />
+                          <p>{item.quantity}</p>
+                          <img
+                            src='/product/plus.png'
+                            alt='Plus Item'
+                            onClick={() =>
+                              dispatch(
+                                addToCart({
+                                  image: item.image,
+                                  title: item.title,
+                                  price: item.price,
+                                  page: item.page,
+                                  quantity: 1,
+                                })
+                              )
+                            }
+                          />
+                        </div>
+                      </div>
+                    )
+                  })
+                : cartState.items.map((item) => {
+                    return (
+                      <div
+                        className={styles.cart__items__product}
+                        key={item.page}
+                      >
+                        <Link href={`/products/${item.page}`}>
+                          <img src={item.image} alt={item.title} />
+                        </Link>
+                        <Link href={`/products/${item.page}`}>
+                          <h3>{item.title}</h3>
+                        </Link>
+                        <div className={styles.cart__items__product__counter}>
+                          <img
+                            src='/product/minus.png'
+                            alt='Minus Item'
+                            onClick={() => {
+                              dispatch(
+                                removeFromCart({
+                                  image: item.image,
+                                  title: item.title,
+                                  price: item.price,
+                                  page: item.page,
+                                })
+                              )
+                            }}
+                          />
+                          <p>{item.quantity}</p>
+                          <img
+                            src='/product/plus.png'
+                            alt='Plus Item'
+                            onClick={() =>
+                              dispatch(
+                                addToCart({
+                                  image: item.image,
+                                  title: item.title,
+                                  price: item.price,
+                                  page: item.page,
+                                  quantity: 1,
+                                })
+                              )
+                            }
+                          />
+                        </div>
+                        <span>${item.price}</span>
+                      </div>
+                    )
+                  })}
             </div>
             <div className={styles.cart__checkout}>
               <p>

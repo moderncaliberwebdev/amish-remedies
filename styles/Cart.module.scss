@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .cart {
   margin-bottom: 10rem;
@@ -36,6 +37,10 @@
     margin: 2rem 0;
     padding-bottom: 0.5rem;
 
+    @include respond(tab-port) {
+      display: none;
+    }
+
     h2 {
       font-size: $font-text;
       width: 10rem;
@@ -64,14 +69,41 @@
       align-items: center;
       gap: 5rem;
 
+      @include respond(tab-port) {
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 3rem;
+
+        &__top {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+
+          &__right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+        }
+      }
+
       img {
         width: 15rem;
         height: 15rem;
         object-fit: contain;
       }
 
+      a {
+        text-decoration: none;
+      }
+
       h3 {
         width: 30rem;
+        color: #000;
+
+        @include respond(tab-port) {
+          width: 100%;
+        }
       }
 
       &__counter {
@@ -84,6 +116,10 @@
         border: 2px solid #999;
         border-radius: 15px;
         height: 5rem;
+
+        @include respond(tab-port) {
+          width: 100%;
+        }
 
         img {
           width: 3rem;
@@ -103,6 +139,12 @@
         flex-grow: 1;
         text-align: right;
         font-weight: 700;
+
+        @include respond(tab-port) {
+          text-align: left;
+          font-weight: 300;
+          flex-grow: 0;
+        }
       }
     }
   }

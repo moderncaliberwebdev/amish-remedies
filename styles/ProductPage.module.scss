@@ -7,13 +7,22 @@
   align-items: center;
   gap: 3rem;
 
+  @include respond(tab-port) {
+    flex-direction: column;
+  }
+
   &__image {
-    width: 70%;
+    width: 100%;
+    max-width: 80rem;
 
     img {
       width: 100%;
       height: 60rem;
       object-fit: contain;
+
+      @include respond(phone) {
+        height: 40rem;
+      }
     }
   }
   &__details {
@@ -21,6 +30,11 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+
+    @include respond(tab-port) {
+      width: 100%;
+      margin-bottom: 5rem;
+    }
 
     h1 {
       font-size: $font-small-head;
@@ -57,6 +71,11 @@
       border-style: none;
       font-size: $font-text;
       cursor: pointer;
+
+      @include respond(tab-port) {
+        width: 100%;
+        max-width: 40rem;
+      }
     }
   }
 }

@@ -113,11 +113,13 @@ export default function Contact() {
         </div>
         <div className={styles.contact__right}>
           <img src='/contact/get-in-touch.png' alt='Get in Touch Image' />
-          <h2>Call Us</h2>
-          <p>717-777-7777</p>
-          <p>717-777-7777</p>
-          <h2>Email</h2>
-          <p>admin@gmail.com</p>
+          <div className={styles.contact__right__numbers}>
+            <h2>Call Us</h2>
+            <p>717-777-7777</p>
+            <p>717-777-7777</p>
+            <h2>Email</h2>
+            <p>admin@gmail.com</p>
+          </div>
         </div>
       </div>
     </Layout>

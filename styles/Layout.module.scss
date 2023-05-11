@@ -151,6 +151,10 @@
   left: 0;
   transition: all 0.5s;
 
+  @include respond(tab-port) {
+    display: none;
+  }
+
   img {
     width: 3rem;
     height: 3rem;
@@ -272,6 +276,10 @@
       flex-direction: row;
       justify-content: space-between;
       gap: 4rem;
+
+      @include respond(tab-port) {
+        flex-direction: column;
+      }
 
       p {
         font-size: $font-text;

@@ -39,6 +39,7 @@ export default function Products({ products, collections }) {
 
   //run filter function when one of the filters is changed
   useEffect(() => {
+    console.log('product filtering')
     filterProducts()
   }, [filterCollectionName, filterPrice, filterKeyword])
 
@@ -91,7 +92,7 @@ export default function Products({ products, collections }) {
         filteredDisplayProducts = tempArray
       }
 
-      //if there is a keyword filter, filer the remaining products by it
+      //if there is a keyword filter, filter the remaining products by it
       if (keywordFromQuery && keywordFromQuery.length > 0) {
         const tempArray = []
         setFilterKeyword(keywordFromQuery)
@@ -139,10 +140,14 @@ export default function Products({ products, collections }) {
   }, [isMobile])
 
   //send user to filtered product page when clicked by a filter
-  const filterProducts = () => {
-    router.push(
-      `/products?collection=${filterCollectionName}&price=${filterPrice}&keyword=${filterKeyword}`
-    )
+  const filterProducts = (search) => {
+    //prevents keyword search from happening on mobile unless the search button is pressed as it messes with mobile screens
+    if (isMobile && query.keyword != filterKeyword && !search) {
+      return
+    } else
+      router.push(
+        `/products?collection=${filterCollectionName}&price=${filterPrice}&keyword=${filterKeyword}`
+      )
   }
 
   //filter the price -> if the price is already selected, unselect it
@@ -210,7 +215,11 @@ export default function Products({ products, collections }) {
                 onChange={(e) => setFilterKeyword(e.target.value)}
                 value={filterKeyword}
               />
-              <img src='/home/Search.png' alt='Search' />
+              <img
+                src='/home/Search.png'
+                alt='Search'
+                onClick={() => filterProducts('search')}
+              />
             </div>
             <h3>Product Type</h3>
             <div className={styles.products__filter__filters__options}>

@@ -122,7 +122,11 @@ export default function Layout({ children }) {
         <div className={styles.smallnav__bottom}>
           <ul>
             <li>
-              <img src='/home/Search-white.png' alt='Search' />
+              <img
+                src='/home/Search-white.png'
+                alt='Search'
+                onClick={searchForKeyword}
+              />
               <input
                 type='text'
                 value={inputText}

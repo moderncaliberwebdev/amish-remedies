@@ -142,7 +142,7 @@ export default function Products({ products, collections }) {
   //send user to filtered product page when clicked by a filter
   const filterProducts = (search) => {
     //prevents keyword search from happening on mobile unless the search button is pressed as it messes with mobile screens
-    if (isMobile && query.keyword != filterKeyword && !search) {
+    if (query.keyword != filterKeyword && !search) {
       return
     } else
       router.push(
@@ -214,6 +214,7 @@ export default function Products({ products, collections }) {
                 placeholder='Keyword Search'
                 onChange={(e) => setFilterKeyword(e.target.value)}
                 value={filterKeyword}
+                onKeyDown={(e) => e.key === 'Enter' && filterProducts('search')}
               />
               <img
                 src='/home/Search.png'

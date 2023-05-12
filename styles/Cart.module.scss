@@ -15,8 +15,13 @@
     align-items: center;
     margin: 10rem;
 
+    @include respond(phone) {
+      margin: 3rem;
+    }
+
     h2 {
       font-size: $font-big-text;
+      text-align: center;
     }
 
     a {

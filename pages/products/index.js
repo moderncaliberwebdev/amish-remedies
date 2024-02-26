@@ -142,12 +142,12 @@ export default function Products({ products, collections }) {
   //send user to filtered product page when clicked by a filter
   const filterProducts = (search) => {
     //prevents keyword search from happening unless the search button is pressed
-    if (query.keyword != filterKeyword && !search) {
-      return
-    } else
-      router.push(
-        `/products?collection=${filterCollectionName}&price=${filterPrice}&keyword=${filterKeyword}`
-      )
+    // if (query.keyword != filterKeyword && !search) {
+    //   return
+    // } else
+    router.push(
+      `/products?collection=${filterCollectionName}&price=${filterPrice}&keyword=${filterKeyword}`
+    )
   }
 
   //filter the price -> if the price is already selected, unselect it

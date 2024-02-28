@@ -65,20 +65,7 @@ export default function ProductPage({ product }) {
   )
 }
 
-export async function getStaticPaths() {
-  const products = await getAllProducts()
-  const pathsArray = products.map((product) => product.node.handle)
-  const paths = []
-
-  pathsArray.forEach((path) => paths.push({ params: { handle: path } }))
-
-  return {
-    paths,
-    fallback: false,
-  }
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const product = await getProductByHandle(params.handle)
 
   return {

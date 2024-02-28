@@ -212,7 +212,7 @@ export default function Cart({ variants }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const variants = await getProductVariants()
 
   return {

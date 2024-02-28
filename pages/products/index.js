@@ -381,11 +381,11 @@ export default function Products({ products, collections }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   const products = await getAllProducts()
   const collections = await getCollections()
 
   return {
-    props: { products, collections }, // will be passed to the page component as props
+    props: { products, collections },
   }
 }

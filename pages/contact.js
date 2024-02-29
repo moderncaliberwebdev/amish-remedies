@@ -3,6 +3,7 @@ import Layout from '../Components/Layout'
 import styles from '../styles/Contact.module.scss'
 
 import emailjs from 'emailjs-com'
+import axios from 'axios'
 
 export default function Contact() {
   const [from_name, setFrom_name] = useState('')
@@ -11,38 +12,20 @@ export default function Contact() {
   const [message, setMessage] = useState('')
   const [response, setResponse] = useState('')
 
-  const handleSubmit = () => {
-    const templateParams = {
-      from_name,
-      email,
-      number,
-      message,
-      subject: 'New Old Amish Remedies Plus Contact Request',
-      client: 'Old Amish Remedies Plus',
-      client_email: 'cmartin@moderncaliber.com',
+  const handleSubmit = async () => {
+    const { data } = await axios.post(
+      `/api/mail?fromname=${from_name}&email=${email}&number=${number}&message=${message}`
+    )
+
+    if (data.formResponse) {
+      setResponse(data.formResponse)
+    } else {
+      setResponse('Message Sent ')
+      setFrom_name('')
+      setEmail('')
+      setNumber('')
+      setMessage('')
     }
-
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_SERVICE_ID,
-        process.env.NEXT_PUBLIC_TEMPLATE_ID,
-        templateParams,
-        process.env.NEXT_PUBLIC_EMAIL_KEY
-      )
-      .then(
-        (result) => {
-          console.log(result.text)
-          setResponse('Message Sent')
-
-          setFrom_name('')
-          setEmail('')
-          setNumber('')
-          setMessage('')
-        },
-        (error) => {
-          setResponse(error.text)
-        }
-      )
   }
 
   return (
@@ -116,9 +99,9 @@ export default function Contact() {
           <div className={styles.contact__right__numbers}>
             <h2>Call Us</h2>
             <p>717-777-7777</p>
-            <p>717-777-7777</p>
+
             <h2>Email</h2>
-            <p>admin@gmail.com</p>
+            <p>support@oldamishremedies.com</p>
           </div>
         </div>
       </div>

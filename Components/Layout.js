@@ -211,8 +211,8 @@ export default function Layout({ children }) {
               <Link href='tel:717-777-777'>717-777-777</Link>
             </li>
             <li>
-              <Link href='mailto:harold@oldamishremedies.com'>
-                harold@oldamishremedies.com
+              <Link href='mailto:support@oldamishremedies.com'>
+                support@oldamishremedies.com
               </Link>
             </li>
           </ul>

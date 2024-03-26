@@ -8,159 +8,59 @@ import Fuse from 'fuse.js'
 import { useMediaQuery } from 'react-responsive'
 
 export default function Products({ products, collections }) {
-  //get queries from url
-  const { query } = useRouter()
   const router = useRouter()
-
-  //state for the products that are displayed on the page
-  const [displayProducts, setDisplayProducts] = useState([])
-
-  //after the api gets the products, it sends them here
-  const [productsFromAPI, setProductsFromAPI] = useState([])
-
-  //the state of the indivdual filters
-  const [filterCollectionName, setFilterCollectionName] = useState('')
-  const [filterPrice, setFilterPrice] = useState('')
-  const [filterKeyword, setFilterKeyword] = useState('')
+  const { query } = router
+  const [displayProducts, setDisplayProducts] = useState(products)
+  const [filterCollectionName, setFilterCollectionName] = useState(
+    query.collection || ''
+  )
+  const [filterPrice, setFilterPrice] = useState(query.price || '')
+  const [filterKeyword, setFilterKeyword] = useState(query.keyword || '')
   const [filterOpen, setFilterOpen] = useState(false)
-
-  //state for sorting products
   const [productSortValue, setProductSortValue] = useState('Featured')
 
-  const isMobile = useMediaQuery({
-    query: '(max-width: 1000px)',
-  })
+  const isMobile = useMediaQuery({ query: '(max-width: 1000px)' })
 
-  //shows me products and collections gathered from graphql api
   useEffect(() => {
-    setProductsFromAPI(products)
-  }, [products])
-  useEffect(() => {}, [collections])
+    let filteredProducts = products
 
-  //run filter function when one of the filters is changed
-  useEffect(() => {
-    console.log('product filtering')
+    if (filterCollectionName) {
+      filteredProducts = filteredProducts.filter(
+        (product) =>
+          product.node.collections.nodes[0].title === filterCollectionName
+      )
+    }
+
+    if (filterPrice) {
+      const priceRangeStart = Number(filterPrice)
+      const priceRangeEnd = priceRangeStart + 10
+      filteredProducts = filteredProducts.filter((product) => {
+        const price = Number(product.node.priceRange.minVariantPrice.amount)
+        return (
+          price >= priceRangeStart &&
+          (priceRangeStart === 40 ? true : price <= priceRangeEnd)
+        )
+      })
+    }
+
+    if (filterKeyword) {
+      const options = {
+        keys: ['node.title'],
+        includeScore: true,
+        ignoreLocation: true,
+        threshold: 0.3,
+      }
+      const fuse = new Fuse(filteredProducts, options)
+      const result = fuse.search(filterKeyword)
+      filteredProducts = result.map((item) => item.item)
+    }
+
+    setDisplayProducts(filteredProducts)
     filterProducts()
   }, [filterCollectionName, filterPrice, filterKeyword])
 
-  //filter results on url update
-  useEffect(() => {
-    //new filtered products array
-    let filteredDisplayProducts = productsFromAPI
-
-    //if there are display products, run the filter
-    if (productsFromAPI.length > 0) {
-      const collectionFromQuery = query.collection
-      const priceFromQuery = query.price
-      const keywordFromQuery = query.keyword
-
-      //if there is a collection filter, filter products by it
-      if (collectionFromQuery && collectionFromQuery.length > 0) {
-        const tempArray = []
-        setFilterCollectionName(collectionFromQuery)
-        filteredDisplayProducts.forEach((product) => {
-          const collectionFromProduct = product.node.collections.nodes[0].title
-          if (collectionFromQuery == collectionFromProduct) {
-            tempArray.push(product)
-          }
-        })
-
-        //set filtered products to be the values of the temp array
-        filteredDisplayProducts = tempArray
-      }
-
-      // if there is a price filter, filter the remaining products by it
-      if (priceFromQuery && priceFromQuery.length > 0) {
-        const tempArray = []
-
-        setFilterPrice(priceFromQuery)
-        const priceRangeStart = Number(priceFromQuery)
-        const priceRangeEnd = Number(priceFromQuery + 10)
-
-        filteredDisplayProducts.forEach((product) => {
-          const price = Number(product.node.priceRange.minVariantPrice.amount)
-
-          //if product is in the price range, add it to temp array
-          if (priceRangeStart == 40 && price >= 40) {
-            tempArray.push(product)
-          } else if (price >= priceRangeStart && price <= priceRangeEnd) {
-            tempArray.push(product)
-          }
-        })
-
-        //set filtered products to be the values of the temp array
-        filteredDisplayProducts = tempArray
-      }
-
-      //if there is a keyword filter, filter the remaining products by it
-      if (keywordFromQuery && keywordFromQuery.length > 0) {
-        const tempArray = []
-        setFilterKeyword(keywordFromQuery)
-
-        const options = {
-          keys: ['node.title'],
-          includeScore: true,
-          ignoreLocation: true,
-          threshold: 0.3,
-        }
-
-        const fuseProducts = new Fuse(filteredDisplayProducts, options)
-
-        const pattern = keywordFromQuery || ''
-
-        const productsSearch = fuseProducts.search(pattern)
-
-        productsSearch.forEach((product) => tempArray.push(product.item))
-
-        filteredDisplayProducts = tempArray
-      }
-
-      //if there are any query parameters, set the filtered products to display, otherwise display all of them
-      if (collectionFromQuery || priceFromQuery || keywordFromQuery) {
-        router.isReady && setDisplayProducts(filteredDisplayProducts)
-      } else setDisplayProducts(productsFromAPI)
-    }
-  }, [query, productsFromAPI])
-
-  //sets filter to open when switching to desktop
-  useEffect(() => {
-    const filters = document.querySelector('#filters')
-    const expand = document.querySelector('#expand')
-    if (!isMobile) {
-      filters.style.display = 'block'
-      filters.style.maxHeight = '50rem'
-
-      expand.style.transform = 'rotate(0deg)'
-
-      setFilterOpen(false)
-    } else {
-      filters.style.display = 'none'
-      filters.style.maxHeight = '0'
-    }
-  }, [isMobile])
-
-  //send user to filtered product page when clicked by a filter
-  const filterProducts = (search) => {
-    //prevents keyword search from happening unless the search button is pressed
-    // if (query.keyword != filterKeyword && !search) {
-    //   return
-    // } else
-    router.push(
-      `/products?collection=${filterCollectionName}&price=${filterPrice}&keyword=${filterKeyword}`
-    )
-  }
-
-  //filter the price -> if the price is already selected, unselect it
-  const filterListener = (number) => {
-    String(query.price) === String(number)
-      ? setFilterPrice('')
-      : setFilterPrice(number)
-  }
-
-  //toggle mobile filter
   const toggleFilter = () => {
     if (isMobile) {
-      console.log('toggle filter')
       const filters = document.querySelector('#filters')
       const expand = document.querySelector('#expand')
 
@@ -171,6 +71,19 @@ export default function Products({ products, collections }) {
 
       setFilterOpen(!filterOpen)
     }
+  }
+
+  const filterProducts = (search) => {
+    console.log('filter products')
+    router.push(
+      `/products?collection=${filterCollectionName}&price=${filterPrice}&keyword=${filterKeyword}`
+    )
+  }
+
+  const filterListener = (number) => {
+    String(query.price) === String(number)
+      ? setFilterPrice('')
+      : setFilterPrice(number)
   }
 
   return (
@@ -227,11 +140,12 @@ export default function Products({ products, collections }) {
               {collections.map((collectionName) => {
                 return (
                   <p
-                    onClick={() =>
+                    onClick={() => {
+                      console.log(query.collection, collectionName.title)
                       String(query.collection) === String(collectionName.title)
                         ? setFilterCollectionName('')
                         : setFilterCollectionName(collectionName.title)
-                    }
+                    }}
                     key={collectionName.title}
                     style={{
                       color:

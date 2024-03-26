@@ -5,7 +5,7 @@
   width: 35rem;
   box-shadow: 0 20px 50px $tirtiary;
   border-radius: 15px;
-  flex: 0 0 auto;
+  // flex: 0 0 auto;
   position: relative;
   scroll-snap-align: center;
 
@@ -50,6 +50,7 @@
     padding: 2rem;
     text-align: center;
     border-radius: 0 0 15px 15px;
+    height: auto;
 
     a {
       text-decoration: none;

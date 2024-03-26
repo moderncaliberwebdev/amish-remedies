@@ -208,11 +208,11 @@ export default function Layout({ children }) {
               <Link href='/contact'>Contact</Link>
             </li>
             <li>
-              <Link href='tel:717-777-777'>717-777-777</Link>
+              <Link href='tel:717-826-3754'>717-826-3754</Link>
             </li>
             <li>
-              <Link href='mailto:support@oldamishremedies.com'>
-                support@oldamishremedies.com
+              <Link href='mailto:support@oldamishremediesplus.com'>
+                support@oldamishremediesplus.com
               </Link>
             </li>
           </ul>

@@ -52,7 +52,7 @@ export default function Categories() {
           <h3>Fertile Hatching Eggs</h3>
         </div>
       </div>
-      <div className={styles.left}>
+      {/* <div className={styles.left}>
         <div className={`${styles.left__block} ${styles.block}`}>
           <img src='/categories/bottle.png' alt='Remedy Bottle' />
           <h3>Bargains and Gift Sets</h3>
@@ -72,7 +72,7 @@ export default function Categories() {
           </p>
           <Link href='/products?collection=Remedies'>Shop Now</Link>
         </div>
-      </div>
+      </div> */}
     </Layout>
   )
 }

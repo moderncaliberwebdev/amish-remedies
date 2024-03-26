@@ -61,7 +61,7 @@
   flex-direction: row;
   align-items: center;
   gap: 3rem;
-  margin: 5rem 0;
+  margin: 3rem 0;
 
   @include respond(tab-port) {
     flex-direction: column;
@@ -73,6 +73,7 @@
   justify-content: right;
   align-items: center;
   gap: 3rem;
+  margin: 3rem 0;
   @include respond(tab-port) {
     flex-direction: column-reverse;
   }

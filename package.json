@@ -25,6 +25,7 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "react-responsive": "^9.0.2",
+    "react-responsive-carousel": "^3.2.23",
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",

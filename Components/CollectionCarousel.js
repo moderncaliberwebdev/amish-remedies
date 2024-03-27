@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ProductCard from './ProductCard'
+import Product from './Product'
 import styles from '../styles/Carousel.module.scss'
 
 function CollectionCarousel({ collection }) {
@@ -86,14 +87,16 @@ function CollectionCarousel({ collection }) {
           id='cards'
           // style={{ transform: `translate3d(${-index * 30}%, 0, 0)` }}
         >
-          {collection.products.edges.map((product) => {
+          {collection.products.edges.map((product, index) => {
             return (
-              <ProductCard
+              <Product
                 image={product.node.featuredImage.url}
                 title={product.node.title}
                 price={product.node.priceRange.minVariantPrice.amount}
                 page={product.node.handle}
-                key={product.node.title}
+                key={product.node.handle}
+                carousel={true}
+                index={index}
               />
             )
           })}

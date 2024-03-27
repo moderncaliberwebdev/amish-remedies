@@ -5,6 +5,8 @@ import styles from '../../styles/ProductPage.module.scss'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../store/cartSlice'
 import { useRouter } from 'next/router'
+import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
+import { Carousel } from 'react-responsive-carousel'
 
 export default function ProductPage({ product }) {
   const dispatch = useDispatch()
@@ -16,11 +18,19 @@ export default function ProductPage({ product }) {
     setCartItems(cartItems - 1)
   }
 
+  console.log('product >> ', product)
+
   return (
     <Layout>
       <div className={styles.product}>
         <div className={styles.product__image}>
-          <img src={product.images.nodes[0].url} alt={product.title} />
+          <Carousel showThumbs={false} showArrows={true}>
+            {product.images.nodes.map((img) => (
+              <div>
+                <img src={img.url} alt={product.title} />
+              </div>
+            ))}
+          </Carousel>
         </div>
         <div className={styles.product__details}>
           <h1>{product.title}</h1>

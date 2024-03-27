@@ -26,7 +26,7 @@ export default function ProductPage({ product }) {
         <div className={styles.product__image}>
           <Carousel showThumbs={false} showArrows={true}>
             {product.images.nodes.map((img) => (
-              <div>
+              <div key={img.url}>
                 <img src={img.url} alt={product.title} />
               </div>
             ))}
